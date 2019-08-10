@@ -1,0 +1,79 @@
+<html>
+<head>
+<title>RecyclerViewAdapter.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #808080;}
+.s3 { color: #6a8759;}
+.ln { color: #606366; font-weight: normal; font-style: normal; }
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+RecyclerViewAdapter.kt</font>
+</center></td></tr></table>
+<pre><a name="l1"><span class="ln">1    </span></a><span class="s0">package </span><span class="s1">com.busango.nonofficialbutsemi</span>
+<a name="l2"><span class="ln">2    </span></a>
+<a name="l3"><span class="ln">3    </span></a>import android.content.Intent
+<a name="l4"><span class="ln">4    </span></a>import android.view.LayoutInflater
+<a name="l5"><span class="ln">5    </span></a>import android.view.View
+<a name="l6"><span class="ln">6    </span></a>import android.view.ViewGroup
+<a name="l7"><span class="ln">7    </span></a>import android.widget.AdapterView
+<a name="l8"><span class="ln">8    </span></a>import android.widget.Toast
+<a name="l9"><span class="ln">9    </span></a>import androidx.recyclerview.widget.RecyclerView
+<a name="l10"><span class="ln">10   </span></a>import kotlinx.android.synthetic.main.recyclerview_item.view.*
+<a name="l11"><span class="ln">11   </span></a>
+<a name="l12"><span class="ln">12   </span></a><span class="s0">class </span><span class="s1">RecyclerViewAdapter(</span><span class="s0">val </span><span class="s1">bookList: MainActivity.RentInfo) : RecyclerView.Adapter&lt;RecyclerViewAdapter.ViewHolder&gt;() {</span>
+<a name="l13"><span class="ln">13   </span></a>    lateinit <span class="s0">var </span><span class="s1">linstener: AdapterView.OnItemClickListener</span>
+<a name="l14"><span class="ln">14   </span></a>
+<a name="l15"><span class="ln">15   </span></a>    override <span class="s0">fun </span><span class="s1">onCreateViewHolder(parent: ViewGroup</span><span class="s0">, </span><span class="s1">viewType: Int): RecyclerViewAdapter.ViewHolder {</span>
+<a name="l16"><span class="ln">16   </span></a>        <span class="s0">val </span><span class="s1">view = LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_item</span><span class="s0">, </span><span class="s1">parent</span><span class="s0">, false</span><span class="s1">)</span>
+<a name="l17"><span class="ln">17   </span></a>        <span class="s0">return </span><span class="s1">ViewHolder(view)</span>
+<a name="l18"><span class="ln">18   </span></a>    }
+<a name="l19"><span class="ln">19   </span></a>
+<a name="l20"><span class="ln">20   </span></a>    override <span class="s0">fun </span><span class="s1">getItemCount(): Int {</span>
+<a name="l21"><span class="ln">21   </span></a>        <span class="s0">return </span><span class="s1">bookList.row.count()</span>
+<a name="l22"><span class="ln">22   </span></a>    }
+<a name="l23"><span class="ln">23   </span></a>
+<a name="l24"><span class="ln">24   </span></a>    override <span class="s0">fun </span><span class="s1">onBindViewHolder(holder: ViewHolder</span><span class="s0">, </span><span class="s1">position: Int) {</span>
+<a name="l25"><span class="ln">25   </span></a>        holder.bindItems(bookList.row[position])
+<a name="l26"><span class="ln">26   </span></a>    }
+<a name="l27"><span class="ln">27   </span></a>
+<a name="l28"><span class="ln">28   </span></a>    <span class="s2">//뷰홀더는 여러개 존재 할 수 있다.</span>
+<a name="l29"><span class="ln">29   </span></a>    <span class="s0">class </span><span class="s1">ViewHolder(view: View) : RecyclerView.ViewHolder(view) {</span>
+<a name="l30"><span class="ln">30   </span></a>
+<a name="l31"><span class="ln">31   </span></a>        init {
+<a name="l32"><span class="ln">32   </span></a>            view.setOnClickListener {
+<a name="l33"><span class="ln">33   </span></a>                <span class="s0">val </span><span class="s1">ttkr = </span><span class="s3">&quot;에 대한 검색결과입니다.&quot;</span>
+<a name="l34"><span class="ln">34   </span></a>                <span class="s0">var </span><span class="s1">tt = itemView.book_title01.text</span>
+<a name="l35"><span class="ln">35   </span></a>                Toast.makeText(it.context<span class="s0">, </span><span class="s3">&quot;</span><span class="s0">$</span><span class="s1">tt</span><span class="s0">$</span><span class="s1">ttkr</span><span class="s3">&quot;</span><span class="s0">, </span><span class="s1">Toast.LENGTH_SHORT).show()</span>
+<a name="l36"><span class="ln">36   </span></a>
+<a name="l37"><span class="ln">37   </span></a>                <span class="s2">//새 액티비티를 연다(3편에서 작업 예정)</span>
+<a name="l38"><span class="ln">38   </span></a>                <span class="s0">val </span><span class="s1">intent = Intent(view.context</span><span class="s0">, </span><span class="s1">SearchPage::</span><span class="s0">class</span><span class="s1">.java)</span>
+<a name="l39"><span class="ln">39   </span></a>                <span class="s0">val </span><span class="s1">googlecom = </span><span class="s3">&quot;https://www.google.com/search?q=&quot;</span>
+<a name="l40"><span class="ln">40   </span></a>                <span class="s1">intent.putExtra(</span><span class="s3">&quot;title&quot;</span><span class="s0">, </span><span class="s3">&quot;title&quot;</span><span class="s1">)</span>
+<a name="l41"><span class="ln">41   </span></a>                println(itemView.book_title01.text)
+<a name="l42"><span class="ln">42   </span></a>                intent.putExtra(<span class="s3">&quot;url&quot;</span><span class="s0">, </span><span class="s1">googlecom+itemView.book_title01.text)</span>
+<a name="l43"><span class="ln">43   </span></a>                view.context.startActivity(intent)
+<a name="l44"><span class="ln">44   </span></a>            }
+<a name="l45"><span class="ln">45   </span></a>        }
+<a name="l46"><span class="ln">46   </span></a>
+<a name="l47"><span class="ln">47   </span></a>        <span class="s0">fun </span><span class="s1">bindItems(data : MainActivity.Book){</span>
+<a name="l48"><span class="ln">48   </span></a>            <span class="s2">//책 썸네일이미지를 어디서 가져 오지?</span>
+<a name="l49"><span class="ln">49   </span></a>            //데이터 표시
+<a name="l50"><span class="ln">50   </span></a>
+<a name="l51"><span class="ln">51   </span></a>            <span class="s1">itemView.book_title01.text = data.menu</span>
+<a name="l52"><span class="ln">52   </span></a><span class="s2">//            itemView.author01.text = data.allergyInfo</span>
+<a name="l53"><span class="ln">53   </span></a>        <span class="s1">}</span>
+<a name="l54"><span class="ln">54   </span></a>
+<a name="l55"><span class="ln">55   </span></a>
+<a name="l56"><span class="ln">56   </span></a>    }
+<a name="l57"><span class="ln">57   </span></a>
+<a name="l58"><span class="ln">58   </span></a>
+<a name="l59"><span class="ln">59   </span></a>}</pre>
+</body>
+</html>

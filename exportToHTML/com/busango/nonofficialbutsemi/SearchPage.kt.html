@@ -1,0 +1,126 @@
+<html>
+<head>
+<title>SearchPage.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+.s3 { color: #808080;}
+.ln { color: #606366; font-weight: normal; font-style: normal; }
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+SearchPage.kt</font>
+</center></td></tr></table>
+<pre><a name="l1"><span class="ln">1    </span></a><span class="s0">package </span><span class="s1">com.busango.nonofficialbutsemi</span>
+<a name="l2"><span class="ln">2    </span></a>
+<a name="l3"><span class="ln">3    </span></a>import android.app.Activity
+<a name="l4"><span class="ln">4    </span></a>import android.content.Intent
+<a name="l5"><span class="ln">5    </span></a>import android.graphics.Color
+<a name="l6"><span class="ln">6    </span></a>import android.os.Bundle
+<a name="l7"><span class="ln">7    </span></a>import android.view.View
+<a name="l8"><span class="ln">8    </span></a>import android.view.View.INVISIBLE
+<a name="l9"><span class="ln">9    </span></a>import android.view.View.VISIBLE
+<a name="l10"><span class="ln">10   </span></a>import android.webkit.WebSettings
+<a name="l11"><span class="ln">11   </span></a>import android.webkit.WebView
+<a name="l12"><span class="ln">12   </span></a>import android.webkit.WebViewClient
+<a name="l13"><span class="ln">13   </span></a>import android.widget.Toast
+<a name="l14"><span class="ln">14   </span></a>import com.google.android.material.bottomnavigation.BottomNavigationView
+<a name="l15"><span class="ln">15   </span></a>import kotlinx.android.synthetic.main.activity_main.*
+<a name="l16"><span class="ln">16   </span></a>
+<a name="l17"><span class="ln">17   </span></a><span class="s0">class </span><span class="s1">SearchPage :Activity() {</span>
+<a name="l18"><span class="ln">18   </span></a>
+<a name="l19"><span class="ln">19   </span></a>    <span class="s0">var </span><span class="s1">mURL: String? = </span><span class="s0">null</span>
+<a name="l20"><span class="ln">20   </span></a>    var <span class="s1">mTitle: String? = </span><span class="s0">null</span>
+<a name="l21"><span class="ln">21   </span></a>
+<a name="l22"><span class="ln">22   </span></a>    <span class="s1">private </span><span class="s0">val </span><span class="s1">onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item -&gt;</span>
+<a name="l23"><span class="ln">23   </span></a>        <span class="s0">when </span><span class="s1">(item.itemId) {</span>
+<a name="l24"><span class="ln">24   </span></a>            R.id.navigation_home -&gt; {
+<a name="l25"><span class="ln">25   </span></a>                <span class="s0">val </span><span class="s1">intent = Intent(</span><span class="s0">this, </span><span class="s1">MainActivity::</span><span class="s0">class</span><span class="s1">.java)</span>
+<a name="l26"><span class="ln">26   </span></a>                startActivity(intent)
+<a name="l27"><span class="ln">27   </span></a>                <span class="s0">return</span><span class="s1">@OnNavigationItemSelectedListener </span><span class="s0">true</span>
+<a name="l28"><span class="ln">28   </span></a>            <span class="s1">}</span>
+<a name="l29"><span class="ln">29   </span></a>            R.id.navigation_dashboard -&gt; {
+<a name="l30"><span class="ln">30   </span></a>                scwebview.visibility = View.VISIBLE
+<a name="l31"><span class="ln">31   </span></a>                searchpagepar.visibility = INVISIBLE
+<a name="l32"><span class="ln">32   </span></a>                screcyclers.visibility = INVISIBLE
+<a name="l33"><span class="ln">33   </span></a>                my_recycler_view01.visibility = INVISIBLE
+<a name="l34"><span class="ln">34   </span></a>                my_recycler_view02.visibility = INVISIBLE
+<a name="l35"><span class="ln">35   </span></a>                my_recycler_view03.visibility = INVISIBLE
+<a name="l36"><span class="ln">36   </span></a>                scwebview.loadUrl(<span class="s2">&quot;https://busanhs.win/kotlin/tommeal.php&quot;</span><span class="s1">)</span>
+<a name="l37"><span class="ln">37   </span></a>                <span class="s0">return</span><span class="s1">@OnNavigationItemSelectedListener </span><span class="s0">true</span>
+<a name="l38"><span class="ln">38   </span></a>            <span class="s1">}</span>
+<a name="l39"><span class="ln">39   </span></a>            R.id.navigation_notifications -&gt; {
+<a name="l40"><span class="ln">40   </span></a>                scwebview.visibility = View.VISIBLE
+<a name="l41"><span class="ln">41   </span></a>                searchpagepar.visibility = INVISIBLE
+<a name="l42"><span class="ln">42   </span></a>                screcyclers.visibility = INVISIBLE
+<a name="l43"><span class="ln">43   </span></a>                my_recycler_view01.visibility = INVISIBLE
+<a name="l44"><span class="ln">44   </span></a>                my_recycler_view02.visibility = INVISIBLE
+<a name="l45"><span class="ln">45   </span></a>                my_recycler_view03.visibility = INVISIBLE
+<a name="l46"><span class="ln">46   </span></a>                scwebview.loadUrl(<span class="s2">&quot;http://busan.hs.kr/page/board/BOARD_1001/main.html?siteid=busanhs&amp;boardid=BUSANHS_007&amp;uid=&amp;category=&quot;</span><span class="s1">)</span>
+<a name="l47"><span class="ln">47   </span></a>                <span class="s0">return</span><span class="s1">@OnNavigationItemSelectedListener </span><span class="s0">true</span>
+<a name="l48"><span class="ln">48   </span></a>            <span class="s1">}</span>
+<a name="l49"><span class="ln">49   </span></a>        }
+<a name="l50"><span class="ln">50   </span></a>        <span class="s0">false</span>
+<a name="l51"><span class="ln">51   </span></a>    <span class="s1">}</span>
+<a name="l52"><span class="ln">52   </span></a>
+<a name="l53"><span class="ln">53   </span></a>    override <span class="s0">fun </span><span class="s1">onCreate(savedInstanceState: Bundle?) {</span>
+<a name="l54"><span class="ln">54   </span></a>        <span class="s0">super</span><span class="s1">.onCreate(savedInstanceState)</span>
+<a name="l55"><span class="ln">55   </span></a><span class="s3">//        TODO 캡쳐 및 보안 방지 설비</span>
+<a name="l56"><span class="ln">56   </span></a>//        window.addFlags(WindowManager.LayoutParams.FLAG_SECURE)
+<a name="l57"><span class="ln">57   </span></a>        <span class="s1">setContentView(R.layout.activity_main)</span>
+<a name="l58"><span class="ln">58   </span></a>        mTitle = intent.getStringExtra(<span class="s2">&quot;title&quot;</span><span class="s1">)</span>
+<a name="l59"><span class="ln">59   </span></a>        mURL = intent.getStringExtra(<span class="s2">&quot;url&quot;</span><span class="s1">)</span>
+<a name="l60"><span class="ln">60   </span></a>
+<a name="l61"><span class="ln">61   </span></a>        searchpage.webViewClient = <span class="s0">object</span><span class="s1">: WebViewClient() {</span>
+<a name="l62"><span class="ln">62   </span></a>            override <span class="s0">fun </span><span class="s1">shouldOverrideUrlLoading(view: WebView</span><span class="s0">, </span><span class="s1">Url: String): Boolean {</span>
+<a name="l63"><span class="ln">63   </span></a>                view.loadUrl(Url)
+<a name="l64"><span class="ln">64   </span></a>                <span class="s0">return true</span>
+<a name="l65"><span class="ln">65   </span></a>            <span class="s1">}</span>
+<a name="l66"><span class="ln">66   </span></a>        }
+<a name="l67"><span class="ln">67   </span></a>
+<a name="l68"><span class="ln">68   </span></a>        searchpagepar.visibility = VISIBLE
+<a name="l69"><span class="ln">69   </span></a>        searchpage.visibility = VISIBLE
+<a name="l70"><span class="ln">70   </span></a>        searchpage.settings.javaScriptEnabled = <span class="s0">true</span>
+<a name="l71"><span class="ln">71   </span></a><span class="s3">//        searchpage.loadUrl(&quot;http://khskeb0513.pw/time1&quot;)</span>
+<a name="l72"><span class="ln">72   </span></a>        <span class="s1">nav_view.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)</span>
+<a name="l73"><span class="ln">73   </span></a>        init()
+<a name="l74"><span class="ln">74   </span></a>    }
+<a name="l75"><span class="ln">75   </span></a>
+<a name="l76"><span class="ln">76   </span></a>    <span class="s0">fun </span><span class="s1">init() {</span>
+<a name="l77"><span class="ln">77   </span></a>
+<a name="l78"><span class="ln">78   </span></a>        searchpage.setBackgroundColor(Color.WHITE)
+<a name="l79"><span class="ln">79   </span></a>        searchpage.scrollBarStyle = WebView.SCROLLBARS_INSIDE_OVERLAY
+<a name="l80"><span class="ln">80   </span></a>        searchpage.settings.databaseEnabled = <span class="s0">false</span>
+<a name="l81"><span class="ln">81   </span></a>        <span class="s1">searchpage.settings.setRenderPriority(WebSettings.RenderPriority.HIGH)</span>
+<a name="l82"><span class="ln">82   </span></a>        searchpage.settings.javaScriptEnabled = <span class="s0">true</span>
+<a name="l83"><span class="ln">83   </span></a>        <span class="s1">searchpage.settings.allowFileAccess = </span><span class="s0">true</span>
+<a name="l84"><span class="ln">84   </span></a>        <span class="s1">searchpage.settings.domStorageEnabled = </span><span class="s0">true</span>
+<a name="l85"><span class="ln">85   </span></a>        <span class="s1">searchpage.settings.setSupportMultipleWindows(</span><span class="s0">false</span><span class="s1">)</span>
+<a name="l86"><span class="ln">86   </span></a>        searchpage.settings.builtInZoomControls = <span class="s0">false</span>
+<a name="l87"><span class="ln">87   </span></a>        <span class="s1">searchpage.settings.setSupportZoom(</span><span class="s0">false</span><span class="s1">)</span>
+<a name="l88"><span class="ln">88   </span></a>        searchpage.settings.setAppCacheEnabled(<span class="s0">true</span><span class="s1">)</span>
+<a name="l89"><span class="ln">89   </span></a>        searchpage.clearHistory()
+<a name="l90"><span class="ln">90   </span></a>        searchpage.clearCache(<span class="s0">false</span><span class="s1">)</span>
+<a name="l91"><span class="ln">91   </span></a>
+<a name="l92"><span class="ln">92   </span></a>        sendRequests()
+<a name="l93"><span class="ln">93   </span></a>    }
+<a name="l94"><span class="ln">94   </span></a>
+<a name="l95"><span class="ln">95   </span></a>    private <span class="s0">fun </span><span class="s1">sendRequests() {</span>
+<a name="l96"><span class="ln">96   </span></a>
+<a name="l97"><span class="ln">97   </span></a>        <span class="s0">if </span><span class="s1">(mURL != </span><span class="s0">null </span><span class="s1">|| mURL.equals(</span><span class="s2">&quot;&quot;</span><span class="s0">, </span><span class="s1">ignoreCase = </span><span class="s0">true</span><span class="s1">)) {</span>
+<a name="l98"><span class="ln">98   </span></a>            searchpage.loadUrl(mURL)
+<a name="l99"><span class="ln">99   </span></a>        } <span class="s0">else </span><span class="s1">{</span>
+<a name="l100"><span class="ln">100  </span></a>            Toast.makeText(<span class="s0">this, </span><span class="s2">&quot;url이 정확하지 않습니다.&quot;</span><span class="s0">, </span><span class="s1">Toast.LENGTH_SHORT).show()</span>
+<a name="l101"><span class="ln">101  </span></a>            finish()
+<a name="l102"><span class="ln">102  </span></a>        }
+<a name="l103"><span class="ln">103  </span></a>
+<a name="l104"><span class="ln">104  </span></a>    }
+<a name="l105"><span class="ln">105  </span></a>
+<a name="l106"><span class="ln">106  </span></a>}</pre>
+</body>
+</html>

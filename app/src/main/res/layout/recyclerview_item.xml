@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--<ImageView android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/thumb"/>-->
+    <!--<ImageView-->
+            <!--android:layout_width="20dp"-->
+            <!--android:layout_height="20dp" tools:src="@drawable/ic_meal" android:id="@+id/imageView"-->
+            <!--android:contentDescription="@string/asdf" android:visibility="visible"-->
+            <!--app:srcCompat="@drawable/ic_meal"/>-->
+    <TextView android:id="@+id/book_title01" android:layout_width="match_parent"
+              android:layout_height="wrap_content" android:gravity="center|center_horizontal|center_vertical"
+              android:text="@string/errortype"/>
+
+
+</LinearLayout>

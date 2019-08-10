@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent" android:focusableInTouchMode="false"
+        android:layout_height="match_parent" android:id="@+id/schoolboardpar">
+
+
+    <ScrollView
+            android:layout_width="match_parent" android:scrollbars="vertical" android:isScrollContainer="true"
+            android:layout_height="0dp" android:id="@+id/sc_scroll"
+            app:layout_constraintBottom_toTopOf="@+id/sc_nav_view"
+            app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/sbrecyclers"
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="0dp"
+        >
+
+            <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="8dp" android:layout_marginRight="8dp" android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_height="wrap_content" android:id="@+id/scdatecard">
+
+                <TextView
+                        android:text="@string/sctv_date"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="8dp" android:layout_marginRight="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_height="wrap_content" android:id="@+id/sbtv_date"
+                        android:gravity="center" android:textColor="@color/colorPrimary" android:textSize="32sp"/>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="8dp" android:layout_marginRight="8dp" android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_height="wrap_content" android:id="@+id/sccard01">
+                <LinearLayout
+                        android:orientation="vertical" android:layout_marginBottom="8dp" android:layout_marginTop="4dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/scll01">
+                    <TextView
+                            android:text="@string/sccho"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/sccho"
+                            android:gravity="center" android:textSize="28sp" android:layout_margin="8dp"
+                            android:layout_marginBottom="8dp" android:textColor="#000000"/>
+                    <TextView android:id="@+id/boarding01" android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:gravity="center|center_horizontal|center_vertical"
+                              android:text="@string/boarding01" android:textSize="20sp"/>
+                    <TextView android:id="@+id/boarding02" android:layout_width="match_parent" android:textSize="20sp"
+                              android:layout_height="wrap_content"
+                              android:gravity="center|center_horizontal|center_vertical"
+                              android:text="@string/boarding02"/>
+                    <TextView android:id="@+id/boarding03" android:layout_width="match_parent" android:textSize="20sp"
+                              android:layout_height="wrap_content"
+                              android:gravity="center|center_horizontal|center_vertical"
+                              android:text="@string/boarding03"/>
+                    <TextView android:id="@+id/boarding04" android:layout_width="match_parent"
+                              android:layout_marginBottom="8dp" android:textSize="20sp"
+                              android:layout_height="wrap_content"
+                              android:gravity="center|center_horizontal|center_vertical"
+                              android:text="@string/barding04"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="8dp" android:layout_marginRight="8dp" android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_height="wrap_content" android:id="@+id/sccard02">
+                <LinearLayout
+                        android:orientation="vertical" android:layout_marginBottom="8dp" android:layout_marginTop="4dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/scll02">
+                    <TextView
+                            android:text="@string/scspecial"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/scspecial" android:layout_margin="8dp"
+                            android:layout_marginBottom="8dp" android:textColor="#000000"
+                            android:gravity="center" android:textSize="28sp"/>
+                    <TextView android:id="@+id/special01" android:layout_width="match_parent" android:textSize="20sp"
+                              android:layout_height="wrap_content"
+                              android:gravity="center|center_horizontal|center_vertical"
+                              android:text="@string/special01"/>
+                    <TextView android:id="@+id/special02" android:layout_width="match_parent"
+                              android:layout_marginBottom="8dp" android:textSize="20sp"
+                              android:layout_height="wrap_content"
+                              android:gravity="center|center_horizontal|center_vertical"
+                              android:text="@string/special02"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="8dp" android:layout_marginRight="8dp" android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_height="wrap_content" android:id="@+id/sccard03">
+                <LinearLayout
+                        android:orientation="vertical" android:layout_marginBottom="8dp" android:layout_marginTop="4dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/scll03">
+                    <TextView
+                            android:text="@string/scboard"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/scboard" android:layout_margin="8dp"
+                            android:layout_marginBottom="8dp" android:textColor="#000000"
+                            android:gravity="center" android:textSize="28sp"/>
+                    <TextView android:id="@+id/scboard01" android:layout_width="match_parent"
+                              android:layout_height="wrap_content" android:textSize="20sp"
+                              android:gravity="center|center_horizontal|center_vertical"
+                              android:text="@string/scboard01"/>
+                    <TextView android:id="@+id/scboard02" android:layout_width="match_parent"
+                              android:layout_height="wrap_content" android:textSize="20sp"
+                              android:gravity="center|center_horizontal|center_vertical"
+                              android:text="@string/scboard02"/>
+                    <TextView android:id="@+id/scboard03" android:layout_width="match_parent" android:textSize="20sp"
+                              android:layout_height="wrap_content" android:layout_marginBottom="8dp"
+                              android:gravity="center|center_horizontal|center_vertical"
+                              android:text="@string/scboard03"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!--appinfo cardview-->
+            <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="8dp" android:layout_marginRight="8dp" android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_height="wrap_content" android:id="@+id/sccard04">
+                <LinearLayout
+                        android:orientation="vertical" android:layout_marginBottom="8dp" android:layout_marginTop="4dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/scll04">
+                    <TextView android:id="@+id/appinfo01" android:layout_width="match_parent"
+                              android:layout_height="wrap_content" android:textSize="20sp" android:layout_margin="8dp"
+                              android:layout_marginBottom="8dp" android:textColor="#000000"
+                              android:gravity="center|center_horizontal|center_vertical"
+                              android:text="@string/scboard01"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
+
+    <WebView
+            android:layout_width="match_parent" android:isScrollContainer="false"
+            android:focusableInTouchMode="false"
+            android:layout_height="0dp"
+            android:id="@+id/scwebview"
+            android:overScrollMode="never"
+            android:visibility="invisible"
+            app:layout_constraintTop_toTopOf="@+id/sc_scroll" app:layout_constraintBottom_toTopOf="@+id/sc_nav_view">
+    </WebView>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/sc_nav_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/windowBackground"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:menu="@menu/bottom_nav_menu" app:layout_constraintHorizontal_bias="0.0"
+    >
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+</androidx.constraintlayout.widget.ConstraintLayout>
