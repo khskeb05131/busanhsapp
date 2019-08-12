@@ -28,8 +28,4 @@
     <string name="scboard02">인성교육방</string>
     <string name="scboard03">진로 탭</string>
     <string name="atloading">급식정보를 불러오는 중 입니다.</string>
-
-    <!--firebase FCM-->
-    <string name="default_notification_channel_id">Channel ID</string>
-    <string name="default_notification_channel_name" translatable="true">Test</string>
 </resources>
