@@ -141,12 +141,14 @@ class MainActivity : AppCompatActivity() {
             7 -> tomkorDayOfWeek = "일요일"
         }
 
-        val tomyear = cal.add(Calendar.YEAR, 1)
-        val tommonth = cal.get((Calendar.MONTH) + 1)
-        val tomdate = cal.add(Calendar.DATE, 1)
+        cal.add(Calendar.DAY_OF_MONTH, +1)
+        val tomdate = cal.get(Calendar.DAY_OF_MONTH)
+        val tommonth = cal.get(Calendar.MONTH)+1
+
+        val tomtvtext:String = "$year$yr$tommonth$mn$tomdate$dy$tomkorDayOfWeek"
 
         tv_date.text = "$year$yr$month$mn$date$dy$korDayOfWeek"
-        tomtv_date.text = "익일 급식(정상, 타이틀바 준비)"
+        tomtv_date.text = tomtvtext
 
         //오늘의 속성을 담음
         tv_date.setOnClickListener{

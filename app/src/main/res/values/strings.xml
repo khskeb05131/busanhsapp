@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">부고재학지원</string>
+    <string name="app_name">부고생활지원</string>
     <string name="title_home">급식메뉴</string>
     <string name="title_dashboard">준비중</string>
     <string name="title_notifications">학교 공지사항</string>
@@ -27,5 +27,7 @@
     <string name="scboard01">열린게시판</string>
     <string name="scboard02">인성교육방</string>
     <string name="scboard03">진로 탭</string>
+    <string name="appinfo01">어플리케이션 정보</string>
+    <string name="appinfo02">개발자에게 후원</string>
     <string name="atloading">급식정보를 불러오는 중 입니다.</string>
 </resources>
