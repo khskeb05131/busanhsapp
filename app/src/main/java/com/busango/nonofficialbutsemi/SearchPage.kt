@@ -57,6 +57,7 @@ class SearchPage :Activity() {
         setContentView(R.layout.activity_main)
         mTitle = intent.getStringExtra("title")
         mURL = intent.getStringExtra("url")
+        atloading.visibility = INVISIBLE
 
         searchpage.webViewClient = object: WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView, Url: String): Boolean {
