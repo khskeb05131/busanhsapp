@@ -8,6 +8,11 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" app:srcCompat="@drawable/bg_firstrun" android:id="@+id/firstrunbg"
+            android:visibility="gone" android:paddingRight="0dp" android:paddingLeft="0dp" android:paddingBottom="0dp"
+            android:paddingTop="0dp" android:adjustViewBounds="true" android:scaleType="centerCrop"/>
     <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent" android:isScrollContainer="true"
             android:layout_height="0dp" android:id="@+id/main_scroll"
@@ -186,7 +191,8 @@
             android:text="@string/atloading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:id="@+id/atloading"
-            android:gravity="center|center_vertical|center_horizontal" android:paddingBottom="16dp" app:layout_constraintBottom_toTopOf="@+id/nav_view"/>
+            android:gravity="center|center_vertical|center_horizontal" android:paddingBottom="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/nav_view"/>
     <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/nav_view"
             android:layout_width="match_parent"

@@ -1,5 +1,6 @@
 package com.busango.nonofficialbutsemi
 
+import android.app.Activity
 import android.app.DownloadManager
 import android.content.Context
 import android.content.Intent
@@ -7,8 +8,9 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.os.Looper
+import android.util.Log
 import android.view.View
-import android.view.View.INVISIBLE
+import android.view.View.*
 import android.webkit.CookieManager
 import android.webkit.URLUtil
 import android.webkit.WebView
@@ -76,6 +78,25 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 //        sc_nav_view.getMenu().getItem(0).setChecked(true)
+
+        val pref = getSharedPreferences("isFirst", Activity.MODE_PRIVATE)
+        val first = pref.getBoolean("isFirst", false)
+        if (!first)
+        {
+            Log.d("Is first Time?", "first")
+            val editor = pref.edit()
+            editor.putBoolean("isFirst", true)
+            editor.apply()
+            firstrunbg.visibility = VISIBLE
+            firstrunbg.bringToFront()
+            firstrunbg.setOnClickListener {
+                firstrunbg.visibility = GONE
+            }
+        }
+        else
+        {
+            Log.d("Is first Time?", "not first")
+        }
 
         my_recycler_view01.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         my_recycler_view01.setHasFixedSize(true)
@@ -184,14 +205,14 @@ class MainActivity : AppCompatActivity() {
             request.setMimeType(mimeType)
             request.addRequestHeader("cookie", CookieManager.getInstance().getCookie(url))
             request.addRequestHeader("User-Agent", userAgent)
-            request.setDescription("Downloading file...")
+            request.setDescription("파일을 다운로드 하고 있습니다.")
             request.setTitle(URLUtil.guessFileName(url, contentDisposition, mimeType))
             request.allowScanningByMediaScanner()
             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
             request.setDestinationInExternalFilesDir(this@MainActivity, Environment.DIRECTORY_DOWNLOADS, URLUtil.guessFileName(url, contentDisposition, mimeType))
             val dm = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
             dm.enqueue(request)
-            Toast.makeText(applicationContext, "Downloading File", Toast.LENGTH_LONG).show()
+            Toast.makeText(applicationContext, "파일을 다운로드 하고 있습니다.", Toast.LENGTH_LONG).show()
         }
 
         fetchJson()

@@ -10,12 +10,14 @@ import android.os.Bundle
 import android.os.Environment
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
-import android.webkit.*
+import android.webkit.CookieManager
+import android.webkit.URLUtil
+import android.webkit.WebSettings.LayoutAlgorithm
+import android.webkit.WebView
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.schoolboard.*
-import android.webkit.WebSettings.LayoutAlgorithm
-import androidx.core.app.ActivityCompat
 import kotlin.system.exitProcess
 
 
@@ -132,14 +134,14 @@ class SchoolBoard :Activity() {
             request.setMimeType(mimeType)
             request.addRequestHeader("cookie", CookieManager.getInstance().getCookie(url))
             request.addRequestHeader("User-Agent", userAgent)
-            request.setDescription("Downloading file...")
+            request.setDescription("파일을 다운로드 하고 있습니다.")
             request.setTitle(URLUtil.guessFileName(url, contentDisposition, mimeType))
             request.allowScanningByMediaScanner()
             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
             request.setDestinationInExternalFilesDir(this@SchoolBoard, Environment.DIRECTORY_DOWNLOADS, URLUtil.guessFileName(url, contentDisposition, mimeType))
             val dm = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
             dm.enqueue(request)
-            Toast.makeText(applicationContext, "Downloading File", Toast.LENGTH_LONG).show()
+            Toast.makeText(applicationContext, "파일을 다운로드 하고 있습니다.", Toast.LENGTH_LONG).show()
         }
 
         sc_nav_view.getMenu().getItem(2).setChecked(true)
