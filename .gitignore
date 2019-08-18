@@ -5,10 +5,11 @@
 /.idea
 /.idea/libraries
 /.idea/modules.xml
-/app/build/outputs/logs/
+/app/build
 /.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
 .DS_Store
 /captures
 .externalNativeBuild
+app/build/outputs/logs/manifest-merger-release-report.txt
