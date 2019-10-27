@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.os.Environment
 import android.os.Looper
 import android.util.Log
-import android.view.View
 import android.view.View.*
 import android.webkit.CookieManager
 import android.webkit.URLUtil
@@ -30,9 +29,6 @@ import java.util.*
 import kotlin.system.exitProcess
 
 
-
-
-
 class MainActivity : AppCompatActivity() {
 
     private lateinit var mywebview: WebView
@@ -47,7 +43,7 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
-                mywebview.visibility = View.INVISIBLE
+                mywebview.visibility = INVISIBLE
                 searchpagepar.visibility = INVISIBLE
                 screcyclers.visibility = INVISIBLE
                 my_recycler_view01.visibility = INVISIBLE
@@ -58,7 +54,7 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
-                mywebview.visibility = View.INVISIBLE
+                mywebview.visibility = INVISIBLE
                 searchpagepar.visibility = INVISIBLE
                 screcyclers.visibility = INVISIBLE
                 my_recycler_view01.visibility = INVISIBLE
@@ -116,13 +112,13 @@ class MainActivity : AppCompatActivity() {
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
         //recycler view first run
-        screcyclers.visibility = View.VISIBLE
-        my_recycler_view01.visibility = View.VISIBLE
-        my_recycler_view02.visibility = View.VISIBLE
-        my_recycler_view03.visibility = View.VISIBLE
-        tommy_recycler_view01.visibility = View.GONE
-        tommy_recycler_view02.visibility = View.GONE
-        tommy_recycler_view03.visibility = View.GONE
+        screcyclers.visibility = VISIBLE
+        my_recycler_view01.visibility = VISIBLE
+        my_recycler_view02.visibility = VISIBLE
+        my_recycler_view03.visibility = VISIBLE
+        tommy_recycler_view01.visibility = GONE
+        tommy_recycler_view02.visibility = GONE
+        tommy_recycler_view03.visibility = GONE
 
         //tomorrow recycler view first run
 
@@ -134,7 +130,7 @@ class MainActivity : AppCompatActivity() {
         val year = cal.get(Calendar.YEAR)
         val month = cal.get(Calendar.MONTH) + 1
         val date = cal.get(Calendar.DATE)
-        var dayOfWeek = cal.get(Calendar.DAY_OF_WEEK)
+        val dayOfWeek = cal.get(Calendar.DAY_OF_WEEK)
 
         var korDayOfWeek = ""
         when (dayOfWeek) {
@@ -167,32 +163,33 @@ class MainActivity : AppCompatActivity() {
         val tommonth = cal.get(Calendar.MONTH)+1
 
         val tomtvtext:String = "$year$yr$tommonth$mn$tomdate$dy$tomkorDayOfWeek"
+        val todtvtext:String = "$year$yr$month$mn$date$dy$korDayOfWeek"
 
-        tv_date.text = "$year$yr$month$mn$date$dy$korDayOfWeek"
+        tv_date.text = todtvtext
         tomtv_date.text = tomtvtext
 
         //오늘의 속성을 담음
         tv_date.setOnClickListener{
-            tv_date.visibility = View.GONE
-            tomtv_date.visibility = View.VISIBLE
-            my_recycler_view01.visibility = View.GONE
-            my_recycler_view02.visibility = View.GONE
-            my_recycler_view03.visibility = View.GONE
-            tommy_recycler_view01.visibility = View.VISIBLE
-            tommy_recycler_view02.visibility = View.VISIBLE
-            tommy_recycler_view03.visibility = View.VISIBLE
+            tv_date.visibility = GONE
+            tomtv_date.visibility = VISIBLE
+            my_recycler_view01.visibility = GONE
+            my_recycler_view02.visibility = GONE
+            my_recycler_view03.visibility = GONE
+            tommy_recycler_view01.visibility = VISIBLE
+            tommy_recycler_view02.visibility = VISIBLE
+            tommy_recycler_view03.visibility = VISIBLE
         }
 
         //내일의 속성을 담음
         tomtv_date.setOnClickListener{
-            tv_date.visibility = View.VISIBLE
-            tomtv_date.visibility = View.GONE
-            my_recycler_view01.visibility = View.VISIBLE
-            my_recycler_view02.visibility = View.VISIBLE
-            my_recycler_view03.visibility = View.VISIBLE
-            tommy_recycler_view01.visibility = View.GONE
-            tommy_recycler_view02.visibility = View.GONE
-            tommy_recycler_view03.visibility = View.GONE
+            tv_date.visibility = VISIBLE
+            tomtv_date.visibility = GONE
+            my_recycler_view01.visibility = VISIBLE
+            my_recycler_view02.visibility = VISIBLE
+            my_recycler_view03.visibility = VISIBLE
+            tommy_recycler_view01.visibility = GONE
+            tommy_recycler_view02.visibility = GONE
+            tommy_recycler_view03.visibility = GONE
         }
 
         mywebview = findViewById(R.id.scwebview)
@@ -227,17 +224,17 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun fetchJson(){
+    private fun fetchJson(){
         println("데어터를 가져 오는 중...")
 //        val key = "6c49687a476b687332385a59476d4d"
 
-        var url1 = "http://khskeb0513.pw/time1"
-        var url2 = "http://khskeb0513.pw/time2"
-        var url3 = "http://khskeb0513.pw/time3"
+        val url1 = "http://khskeb0513.pw/time1"
+        val url2 = "http://khskeb0513.pw/time2"
+        val url3 = "http://khskeb0513.pw/time3"
         //tomorrow
-        var tomurl1 = "http://khskeb0513.pw/time1tom"
-        var tomurl2 = "http://khskeb0513.pw/time2tom"
-        var tomurl3 = "http://khskeb0513.pw/time3tom"
+        val tomurl1 = "http://khskeb0513.pw/time1tom"
+        val tomurl2 = "http://khskeb0513.pw/time2tom"
+        val tomurl3 = "http://khskeb0513.pw/time3tom"
 
         val request1 = Request.Builder().url(url1).build()
         val client1 = OkHttpClient()
@@ -256,7 +253,7 @@ class MainActivity : AppCompatActivity() {
 
         client1.newCall(request1).enqueue(object: Callback {
             override fun onResponse(call: Call, response: Response) {
-                var body = response.body?.string()
+                val body = response.body?.string()
                 println(body)
                 //파싱 - 이렇게 가져온 데이터를 모델오브젝트로 변환해 줘야 한다.
                 val gson = GsonBuilder().create()
@@ -285,7 +282,7 @@ class MainActivity : AppCompatActivity() {
         })
         client2.newCall(request2).enqueue(object: Callback {
             override fun onResponse(call: Call, response: Response) {
-                var body = response.body?.string()
+                val body = response.body?.string()
                 println(body)
                 //파싱 - 이렇게 가져온 데이터를 모델오브젝트로 변환해 줘야 한다.
                 val gson = GsonBuilder().create()
@@ -309,7 +306,7 @@ class MainActivity : AppCompatActivity() {
         })
         client3.newCall(request3).enqueue(object: Callback {
             override fun onResponse(call: Call, response: Response) {
-                var body = response.body?.string()
+                val body = response.body?.string()
                 println(body)
 
                 //파싱 - 이렇게 가져온 데이터를 모델오브젝트로 변환해 줘야 한다.
@@ -337,7 +334,7 @@ class MainActivity : AppCompatActivity() {
         //tomorrow
         tomclient1.newCall(tomrequest1).enqueue(object: Callback {
             override fun onResponse(call: Call, response: Response) {
-                var body = response.body?.string()
+                val body = response.body?.string()
                 println(body)
                 //파싱 - 이렇게 가져온 데이터를 모델오브젝트로 변환해 줘야 한다.
                 val gson = GsonBuilder().create()
@@ -366,7 +363,7 @@ class MainActivity : AppCompatActivity() {
         })
         tomclient2.newCall(tomrequest2).enqueue(object: Callback {
             override fun onResponse(call: Call, response: Response) {
-                var body = response.body?.string()
+                val body = response.body?.string()
                 println(body)
                 //파싱 - 이렇게 가져온 데이터를 모델오브젝트로 변환해 줘야 한다.
                 val gson = GsonBuilder().create()
@@ -390,7 +387,7 @@ class MainActivity : AppCompatActivity() {
         })
         tomclient3.newCall(tomrequest3).enqueue(object: Callback {
             override fun onResponse(call: Call, response: Response) {
-                var body = response.body?.string()
+                val body = response.body?.string()
                 println(body)
 
                 //파싱 - 이렇게 가져온 데이터를 모델오브젝트로 변환해 줘야 한다.
@@ -417,19 +414,19 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-
-
-    private var first_time : Long = 0
-    private var second_time : Long = 0
+    private var time:Long = 0
     override fun onBackPressed() {
-        second_time = System.currentTimeMillis()
-        if(second_time - first_time < 2000){
-            super.onBackPressed()
+        if (System.currentTimeMillis() - time >= 2000)
+        {
+            time = System.currentTimeMillis()
+            Toast.makeText(applicationContext, "뒤로가기 버튼을 한번 더 눌러 종료하십시오.", Toast.LENGTH_SHORT).show()
+        }
+        else if (System.currentTimeMillis() - time < 2000)
+        {
             ActivityCompat.finishAffinity(this)
-            System.runFinalizersOnExit(true)
+            finish()
             exitProcess(0)
-        }else Toast.makeText(this,"뒤로가기 버튼을 한번 더 눌러 종료하십시오.",Toast.LENGTH_SHORT).show()
-        first_time = System.currentTimeMillis()
+        }
     }
 
     data class RentInfo(val requesttype: String, val row: List<Book> )

@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.webkit.WebSettings
@@ -16,8 +15,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class SearchPage :Activity() {
 
-    var mURL: String? = null
-    var mTitle: String? = null
+    private var mURL: String? = null
+    private var mTitle: String? = null
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
@@ -27,7 +26,7 @@ class SearchPage :Activity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
-                scwebview.visibility = View.VISIBLE
+                scwebview.visibility = VISIBLE
                 searchpagepar.visibility = INVISIBLE
                 screcyclers.visibility = INVISIBLE
                 my_recycler_view01.visibility = INVISIBLE
@@ -37,7 +36,7 @@ class SearchPage :Activity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
-                scwebview.visibility = View.VISIBLE
+                scwebview.visibility = VISIBLE
                 searchpagepar.visibility = INVISIBLE
                 screcyclers.visibility = INVISIBLE
                 my_recycler_view01.visibility = INVISIBLE
@@ -74,7 +73,7 @@ class SearchPage :Activity() {
         init()
     }
 
-    fun init() {
+    private fun init() {
 
         searchpage.setBackgroundColor(Color.WHITE)
         searchpage.scrollBarStyle = WebView.SCROLLBARS_INSIDE_OVERLAY

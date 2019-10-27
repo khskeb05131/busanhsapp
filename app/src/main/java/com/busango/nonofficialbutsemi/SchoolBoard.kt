@@ -114,7 +114,7 @@ class SchoolBoard :Activity() {
         scwebview = findViewById(R.id.scwebview)
         scwebview.settings.javaScriptEnabled = true
         scwebview.settings.domStorageEnabled = true
-        scwebview.setVerticalScrollBarEnabled(false)
+        scwebview.isVerticalScrollBarEnabled = false
 
         scwebview.setBackgroundColor(Color.WHITE)
         scwebview.settings.setSupportMultipleWindows(false)
@@ -148,15 +148,16 @@ class SchoolBoard :Activity() {
         sc_nav_view.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
     }
 
-    fun removecards() {
+    private fun removecards() {
         sccard01.visibility = INVISIBLE
         sccard02.visibility = INVISIBLE
         sccard03.visibility = INVISIBLE
         scdatecard.visibility = INVISIBLE
         sbrecyclers.visibility = INVISIBLE
+        Toast.makeText(applicationContext, "다른 항목으로 이동하려면 학교 공지사항 탭을 누르어 이동하십시오.", Toast.LENGTH_LONG).show()
     }
 
-    fun viewcards() {
+    private fun viewcards() {
         sccard01.visibility = VISIBLE
         sccard02.visibility = VISIBLE
         sccard03.visibility = VISIBLE
@@ -170,29 +171,22 @@ class SchoolBoard :Activity() {
 //            return true
 //        }
 //    }
-//
 
-    private var first_time : Long = 0
-    private var second_time : Long = 0
+    private var time:Long = 0
     override fun onBackPressed() {
-        if (scwebview.canGoBack()) {
-            scwebview.goBack()
-        } else {
-            second_time = System.currentTimeMillis()
-            if(second_time - first_time < 2000){
-                super.onBackPressed()
-                ActivityCompat.finishAffinity(this)
-                System.runFinalizersOnExit(true)
-                exitProcess(0)
-            } else {
-                Toast.makeText(this,"뒤로가기 버튼을 한번 더 눌러 종료하십시오.",Toast.LENGTH_SHORT).show()
-                first_time = System.currentTimeMillis()
-                scwebview.visibility = INVISIBLE
-                viewcards()
+        if (System.currentTimeMillis() - time >= 2000)
+        {
+            if(scwebview.canGoBack()){
+                scwebview.goBack()} else {
+                time = System.currentTimeMillis()
+                Toast.makeText(applicationContext, "뒤로가기 버튼을 한번 더 눌러 종료하십시오.", Toast.LENGTH_SHORT).show()
             }
         }
+        else if (System.currentTimeMillis() - time < 2000)
+        {
+            ActivityCompat.finishAffinity(this)
+            finish()
+            exitProcess(0)
+        }
     }
-
-
-
 }

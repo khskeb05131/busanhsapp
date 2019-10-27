@@ -1,5 +1,6 @@
 package com.busango.nonofficialbutsemi
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -37,27 +38,30 @@ class DoCenter :Activity() {
         false
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        TODO 캡쳐 및 보안 설비
 //        window.addFlags(WindowManager.LayoutParams.FLAG_SECURE)
         setContentView(R.layout.docenter)
-        do_nav_view.getMenu().getItem(1).setChecked(true)
-        tv_docenter.setText("DoCenter 액티비티 준비")
+        do_nav_view.menu.getItem(1).isChecked = true
+        tv_docenter.text = "DoCenter 액티비티 준비"
         do_nav_view.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
     }
 
-    private var first_time : Long = 0
-    private var second_time : Long = 0
+    private var time:Long = 0
     override fun onBackPressed() {
-        second_time = System.currentTimeMillis()
-        if(second_time - first_time < 2000){
-            super.onBackPressed()
+        if (System.currentTimeMillis() - time >= 2000)
+        {
+            time = System.currentTimeMillis()
+            Toast.makeText(applicationContext, "뒤로가기 버튼을 한번 더 눌러 종료하십시오.", Toast.LENGTH_SHORT).show()
+        }
+        else if (System.currentTimeMillis() - time < 2000)
+        {
             ActivityCompat.finishAffinity(this)
-            System.runFinalizersOnExit(true)
+            finish()
             exitProcess(0)
-        }else Toast.makeText(this,"뒤로가기 버튼을 한번 더 눌러 종료하십시오.",Toast.LENGTH_SHORT).show()
-        first_time = System.currentTimeMillis()
+        }
     }
 
 }

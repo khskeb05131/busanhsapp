@@ -2,9 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent" android:focusableInTouchMode="false"
-        android:layout_height="match_parent" android:id="@+id/schoolboardpar">
+        android:layout_height="match_parent">
 
 
     <ScrollView
@@ -45,11 +44,11 @@
                 <LinearLayout
                         android:orientation="vertical" android:layout_marginBottom="8dp" android:layout_marginTop="4dp"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:id="@+id/scll01">
+                        android:layout_height="wrap_content">
                     <TextView
                             android:text="@string/sccho"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content" android:id="@+id/sccho"
+                            android:layout_height="wrap_content"
                             android:gravity="center" android:textSize="28sp" android:layout_margin="8dp"
                             android:layout_marginBottom="8dp" android:textColor="#000000"/>
                     <TextView android:id="@+id/boarding01" android:layout_width="match_parent"
@@ -79,11 +78,11 @@
                 <LinearLayout
                         android:orientation="vertical" android:layout_marginBottom="8dp" android:layout_marginTop="4dp"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:id="@+id/scll02">
+                        android:layout_height="wrap_content">
                     <TextView
                             android:text="@string/scspecial"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content" android:id="@+id/scspecial" android:layout_margin="8dp"
+                            android:layout_height="wrap_content" android:layout_margin="8dp"
                             android:layout_marginBottom="8dp" android:textColor="#000000"
                             android:gravity="center" android:textSize="28sp"/>
                     <TextView android:id="@+id/special01" android:layout_width="match_parent" android:textSize="20sp"
@@ -105,11 +104,11 @@
                 <LinearLayout
                         android:orientation="vertical" android:layout_marginBottom="8dp" android:layout_marginTop="4dp"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:id="@+id/scll03">
+                        android:layout_height="wrap_content">
                     <TextView
                             android:text="@string/scboard"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content" android:id="@+id/scboard" android:layout_margin="8dp"
+                            android:layout_height="wrap_content" android:layout_margin="8dp"
                             android:layout_marginBottom="8dp" android:textColor="#000000"
                             android:gravity="center" android:textSize="28sp"/>
                     <TextView android:id="@+id/scboard01" android:layout_width="match_parent"
@@ -132,12 +131,12 @@
                     android:layout_width="match_parent"
                     android:layout_marginTop="8dp" android:layout_marginRight="8dp" android:layout_marginBottom="8dp"
                     android:layout_marginLeft="8dp"
-                    android:layout_height="wrap_content" android:id="@+id/sccard04">
+                    android:layout_height="wrap_content">
                 <LinearLayout
                         android:orientation="vertical" android:layout_marginBottom="8dp" android:layout_marginTop="4dp"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:id="@+id/scll04">
-                    <TextView android:id="@+id/appinfo01" android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    <TextView android:layout_width="match_parent"
                               android:layout_height="wrap_content" android:textSize="20sp" android:layout_margin="8dp"
                               android:layout_marginBottom="8dp" android:textColor="#000000"
                               android:gravity="center|center_horizontal|center_vertical"

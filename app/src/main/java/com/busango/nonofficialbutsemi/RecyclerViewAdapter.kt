@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.recyclerview_item.view.*
 
-class RecyclerViewAdapter(val bookList: MainActivity.RentInfo) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
+class RecyclerViewAdapter(private val bookList: MainActivity.RentInfo) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
     lateinit var linstener: AdapterView.OnItemClickListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewAdapter.ViewHolder {
@@ -31,7 +31,7 @@ class RecyclerViewAdapter(val bookList: MainActivity.RentInfo) : RecyclerView.Ad
         init {
             view.setOnClickListener {
                 val ttkr = "에 대한 검색결과입니다."
-                var tt = itemView.book_title01.text
+                val tt = itemView.book_title01.text
                 Toast.makeText(it.context, "$tt$ttkr", Toast.LENGTH_SHORT).show()
 
                 //새 액티비티를 연다(3편에서 작업 예정)

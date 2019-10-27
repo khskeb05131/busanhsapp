@@ -3,15 +3,8 @@
     <string name="title_home">급식메뉴</string>
     <string name="title_dashboard">준비중</string>
     <string name="title_notifications">학교 공지사항</string>
-    <string name="link_home">https://busanhs.win</string>
-    <string name="link_dashboard">%link_dashboard%</string>
-    <string name="link_notifications">%link_notifications%</string>
-    <string name="notificationId">111</string>
-    <string name="CHANNEL_ID">id</string>
-    <string name="textContent">testing…</string>
-    <string name="asdf">asdf</string>
     <string name="errortype">어플리케이션에 오류가 발생하였습니다. 다시시작하여 주십시오.</string>
-    <string name="tv_docenter">docenter</string>
+    <string name="tv_docenter">중간 탭 입니다. 조만간 아이디어가 실현 될 예정입니다.</string>
 
     <!--school board names-->
     <string name="sctv_date">부산고등학교 홈페이지</string>
@@ -27,7 +20,8 @@
     <string name="scboard01">열린게시판</string>
     <string name="scboard02">인성교육방</string>
     <string name="scboard03">진로 탭</string>
-    <string name="appinfo01">어플리케이션 정보</string>
-    <string name="appinfo02">개발자에게 후원</string>
     <string name="atloading">급식정보를 불러오는 중 입니다.</string>
+    <string name="main_cho">조식</string>
+    <string name="main_chung">중식</string>
+    <string name="main_suk">석식</string>
 </resources>
