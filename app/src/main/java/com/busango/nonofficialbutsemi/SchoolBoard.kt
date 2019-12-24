@@ -8,6 +8,7 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.webkit.CookieManager
@@ -17,15 +18,22 @@ import android.webkit.WebView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.recyclerview_item.view.*
 import kotlinx.android.synthetic.main.schoolboard.*
+import kotlinx.android.synthetic.main.schoolboard.sccard01
+import kotlinx.android.synthetic.main.schoolboard.bg_disable_site
+import kotlinx.android.synthetic.main.schoolboard.scdatecard
 import kotlin.system.exitProcess
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+
+
 
 
 class SchoolBoard :Activity() {
 
     //TODO: 꼭 앱 죽이기 전에 먼저 반응받아서 죽는 놈들 정리할 것.
-
-    private lateinit var scwebview: WebView
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
@@ -57,91 +65,67 @@ class SchoolBoard :Activity() {
 //        window.addFlags(WindowManager.LayoutParams.FLAG_SECURE)
         setContentView(R.layout.schoolboard)
 
+        bg_disable_site.bringToFront()
+        bg_disable_site.setOnClickListener {
+            bg_disable_site.visibility = View.GONE
+        }
+
+        removecards()
+
+        bg_disable_site.bringToFront()
+
         viewcards()
 
         sbtv_date.setOnClickListener{
-            scwebview.visibility = VISIBLE
-            removecards()
-            scwebview.loadUrl("http://busan.hs.kr/")
+            val intent = Intent(applicationContext, BoardWebview::class.java)
+            intent.putExtra("url","http://busan.hs.kr")
+            startActivity(intent)
         }
 
         boarding01.setOnClickListener{
-            scwebview.visibility = VISIBLE
-            removecards()
-            scwebview.loadUrl("http://busan.hs.kr/page/board/BOARD_1001/main.html?siteid=busanhs&boardid=BUSANHS_007&uid=&category=")
+            val intent = Intent(applicationContext, BoardWebview::class.java)
+            intent.putExtra("url","http://busan.hs.kr/page/board/BOARD_1001/main.html?siteid=busanhs&boardid=BUSANHS_007&uid=&category=")
+            startActivity(intent)
         }
         boarding02.setOnClickListener{
-            scwebview.visibility = VISIBLE
-            removecards()
-            scwebview.loadUrl("http://busan.hs.kr/page/board/BOARD_1001/main.html?siteid=busanhs&boardid=BUSANHS_040&uid=&category=")
+            val intent = Intent(applicationContext, BoardWebview::class.java)
+            intent.putExtra("url","http://busan.hs.kr/page/board/BOARD_1001/main.html?siteid=busanhs&boardid=BUSANHS_040&uid=&category=")
+            startActivity(intent)
         }
         boarding03 .setOnClickListener{
-            scwebview.visibility = VISIBLE
-            removecards()
-            scwebview.loadUrl("http://busan.hs.kr/asp/PLAN/PLAN_1001/main.html?siteid=busanhs&boardid=PLAN&uid=&category=&board_color=blue")
+            val intent = Intent(applicationContext, BoardWebview::class.java)
+            intent.putExtra("url","http://busan.hs.kr/asp/PLAN/PLAN_1001/main.html?siteid=busanhs&boardid=PLAN&uid=&category=&board_color=blue")
+            startActivity(intent)
         }
         boarding04.setOnClickListener{
-            scwebview.visibility = VISIBLE
-            removecards()
-            scwebview.loadUrl("http://busan.hs.kr/page/board/BOARD_1001/main.html?siteid=busanhs&boardid=BUSANHS_146&uid=&category=")
+            val intent = Intent(applicationContext, BoardWebview::class.java)
+            intent.putExtra("url","http://busan.hs.kr/page/board/BOARD_1001/main.html?siteid=busanhs&boardid=BUSANHS_146&uid=&category=")
+            startActivity(intent)
         }
         special01.setOnClickListener{
-            scwebview.visibility = VISIBLE
-            removecards()
-            scwebview.loadUrl("http://busan.hs.kr/page/board/BOARD_1001/main.html?siteid=busanhs&boardid=BUSANHS_149&uid=&category=")
+            val intent = Intent(applicationContext, BoardWebview::class.java)
+            intent.putExtra("url","http://busan.hs.kr/page/board/BOARD_1001/main.html?siteid=busanhs&boardid=BUSANHS_149&uid=&category=")
+            startActivity(intent)
         }
         special02.setOnClickListener{
-            scwebview.visibility = VISIBLE
-            removecards()
-            scwebview.loadUrl("http://busan.hs.kr/page/board/BOARD_1001/main.html?siteid=busanhs&boardid=BUSANHS_158&uid=&category=")
+            val intent = Intent(applicationContext, BoardWebview::class.java)
+            intent.putExtra("url","http://busan.hs.kr/page/board/BOARD_1001/main.html?siteid=busanhs&boardid=BUSANHS_158&uid=&category=")
+            startActivity(intent)
         }
         scboard01.setOnClickListener{
-            scwebview.visibility = VISIBLE
-            removecards()
-            scwebview.loadUrl("http://busan.hs.kr/page/board/BOARD_1001/main.html?siteid=busanhs&boardid=BUSANHS_039&uid=&category=")
+            val intent = Intent(applicationContext, BoardWebview::class.java)
+            intent.putExtra("url","http://busan.hs.kr/page/board/BOARD_1001/main.html?siteid=busanhs&boardid=BUSANHS_039&uid=&category=")
+            startActivity(intent)
         }
         scboard02.setOnClickListener{
-            scwebview.visibility = VISIBLE
-            removecards()
-            scwebview.loadUrl("http://busan.hs.kr/page/board/BOARD_1001/main.html?siteid=busanhs&boardid=BUSANHS_144&uid=&category=")
+            val intent = Intent(applicationContext, BoardWebview::class.java)
+            intent.putExtra("url","http://busan.hs.kr/page/board/BOARD_1001/main.html?siteid=busanhs&boardid=BUSANHS_144&uid=&category=")
+            startActivity(intent)
         }
         scboard03.setOnClickListener{
-            scwebview.visibility = VISIBLE
-            removecards()
-            scwebview.loadUrl("http://busan.hs.kr/page/board/BOARD_1001/main.html?siteid=busanhs&boardid=BUSANHS_085&uid=&category=")
-        }
-
-        scwebview = findViewById(R.id.scwebview)
-        scwebview.settings.javaScriptEnabled = true
-        scwebview.settings.domStorageEnabled = true
-        scwebview.isVerticalScrollBarEnabled = false
-
-        scwebview.setBackgroundColor(Color.WHITE)
-        scwebview.settings.setSupportMultipleWindows(false)
-        scwebview.settings.builtInZoomControls = false
-        scwebview.settings.setSupportZoom(false)
-        scwebview.settings.setAppCacheEnabled(true)
-        scwebview.clearHistory()
-        scwebview.isHorizontalScrollBarEnabled = false
-        scwebview.clearCache(false)
-
-        scwebview.getSettings().setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN)
-
-        scwebview.loadUrl("file:///android_asset/loading.html")
-        scwebview.webViewClient = MainActivity.MyClient()
-        scwebview.setDownloadListener { url, userAgent, contentDisposition, mimeType, _ ->
-            val request = DownloadManager.Request(Uri.parse(url))
-            request.setMimeType(mimeType)
-            request.addRequestHeader("cookie", CookieManager.getInstance().getCookie(url))
-            request.addRequestHeader("User-Agent", userAgent)
-            request.setDescription("파일을 다운로드 하고 있습니다.")
-            request.setTitle(URLUtil.guessFileName(url, contentDisposition, mimeType))
-            request.allowScanningByMediaScanner()
-            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-            request.setDestinationInExternalFilesDir(this@SchoolBoard, Environment.DIRECTORY_DOWNLOADS, URLUtil.guessFileName(url, contentDisposition, mimeType))
-            val dm = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-            dm.enqueue(request)
-            Toast.makeText(applicationContext, "파일을 다운로드 하고 있습니다.", Toast.LENGTH_LONG).show()
+            val intent = Intent(applicationContext, BoardWebview::class.java)
+            intent.putExtra("url","http://busan.hs.kr/page/board/BOARD_1001/main.html?siteid=busanhs&boardid=BUSANHS_085&uid=&category=")
+            startActivity(intent)
         }
 
         sc_nav_view.getMenu().getItem(2).setChecked(true)
@@ -165,22 +149,12 @@ class SchoolBoard :Activity() {
         sbrecyclers.visibility = VISIBLE
     }
 
-//    class  : WebViewClient() {
-//        override fun shouldOverrideUrlLoading(view: WebView, Url: String): Boolean {
-//            view.loadUrl(Url)
-//            return true
-//        }
-//    }
-
     private var time:Long = 0
     override fun onBackPressed() {
         if (System.currentTimeMillis() - time >= 2000)
         {
-            if(scwebview.canGoBack()){
-                scwebview.goBack()} else {
-                time = System.currentTimeMillis()
-                Toast.makeText(applicationContext, "뒤로가기 버튼을 한번 더 눌러 종료하십시오.", Toast.LENGTH_SHORT).show()
-            }
+            time = System.currentTimeMillis()
+            Toast.makeText(applicationContext, "뒤로가기 버튼을 한번 더 눌러 종료하십시오.", Toast.LENGTH_SHORT).show()
         }
         else if (System.currentTimeMillis() - time < 2000)
         {

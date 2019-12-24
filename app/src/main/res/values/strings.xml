@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">부산고등학교</string>
     <string name="title_home">급식메뉴</string>
-    <string name="title_dashboard">자율등록 학생증</string>
+    <string name="title_dashboard">디지털 학생증</string>
     <string name="title_notifications">학교 공지사항</string>
     <string name="errortype">어플리케이션에 오류가 발생하였습니다. 다시시작하여 주십시오.</string>
     <string name="tv_docenter">중간 탭 입니다. 조만간 아이디어가 실현 될 예정입니다.</string>
@@ -24,4 +24,34 @@
     <string name="main_cho">조식</string>
     <string name="main_chung">중식</string>
     <string name="main_suk">석식</string>
+    <string name="school_name">부산고등학교</string>
+    <string name="school_domain">http://www.busan.hs.kr</string>
+    <string name="str_id">학 생 증</string>
+    <string name="stu_name_eg">네트워크 확인</string>
+    <string name="id_avatar">id_avatar</string>
+    <string name="principle_mark">principle_mark</string>
+    <string name="id_sec_table_a">유의사항</string>
+    <string name="id_sec_table_b">1. 본 증은 항상 휴대하여야 합니다.</string>
+    <string name="id_sec_table_c">본 증을 분실시 책임은 본인이 지며,\n생활지도부에 신고하여야 합니다.</string>
+    <string name="id_addr1">48802 부산광역시 동구 초량로 40번길 23</string>
+    <string name="id_addr2">TEL: (051)6000–700 FAX: (051)466–2347</string>
+    <string name="g1">1학년</string>
+    <string name="g2">2학년</string>
+    <string name="eg1b">1 반</string>
+    <string name="eg1c">1 번</string>
+    <string name="g3">3학년</string>
+    <string name="personal_info">개인 인적사항</string>
+    <string name="email_text">이메일</string>
+    <string name="email_eg_data">eg@gmail.com</string>
+    <string name="birthdate_text">생년월일</string>
+    <string name="birthdate_eg_data">1999/01/01</string>
+    <string name="regnum_eg_num">1</string>
+    <string name="regnum_title">개인부호번호</string>
+    <string name="nonofficial_ment">검증용 바코드\n본 증은 공식적인 효력이 없습니다.</string>
+    <string name="register_hi_1">안녕하세요, 처음이신가요?</string>
+    <string name="register_hi_2">부여 받은 개인부호번호를 입력하여 주십시오.</string>
+    <string name="register_edittext_4digits">4자리 번호 입력(0123)</string>
+    <string name="reg_btn">등록 / Registration</string>
+    <string name="barcode">barcode</string>
+    <string name="bshs_logo">bshs_logo</string>
 </resources>

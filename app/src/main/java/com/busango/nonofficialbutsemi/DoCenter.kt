@@ -3,12 +3,28 @@ package com.busango.nonofficialbutsemi
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
+import android.view.View.*
+import android.view.WindowManager
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonParser
+import com.google.zxing.BarcodeFormat
+import com.google.zxing.qrcode.QRCodeWriter
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.docenter.*
+import okhttp3.*
+import org.json.JSONArray
+import org.json.JSONException
+import java.io.IOException
 import kotlin.system.exitProcess
+
 
 class DoCenter :Activity() {
 
@@ -42,11 +58,157 @@ class DoCenter :Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        TODO 캡쳐 및 보안 설비
-//        window.addFlags(WindowManager.LayoutParams.FLAG_SECURE)
+        window.addFlags(WindowManager.LayoutParams.FLAG_SECURE)
         setContentView(R.layout.docenter)
+        val iv = findViewById<ImageView>(R.id.iv)
         do_nav_view.menu.getItem(1).isChecked = true
-        tv_docenter.text = "DoCenter 액티비티 준비"
+
+        val pref0 = getSharedPreferences("docenter_first", MODE_PRIVATE)
+        val first0 = pref0.getBoolean("docenter_first", false)
+        val editor0 = pref0.edit()
+        val regnum = getSharedPreferences("regnum", MODE_PRIVATE)
+        val regnumEd = regnum.edit()
+
+        if (!first0)
+        {
+            Log.d("docenter first Time?", "first")
+            id_first.visibility = INVISIBLE
+            id_second.visibility = INVISIBLE
+            id_third.visibility = INVISIBLE
+            id_reg.visibility = VISIBLE
+            id_reg.bringToFront()
+
+            btn_reg.setOnClickListener {
+                val regnumEt = edit_regnum.text.toString().toInt()
+                regnumEd.putInt("regnum", regnumEt)
+                regnumEd.apply()
+                editor0.putBoolean("docenter_first", true)
+                editor0.apply()
+
+                id_reg.visibility = GONE
+                id_first.visibility = VISIBLE
+                id_second.visibility = INVISIBLE
+                id_third.visibility = INVISIBLE
+                id_first.bringToFront()
+            }
+        }
+        else
+        {
+            Log.d("Is first Time?", "not first")
+        }
+
+        //Activities
+        id_first.bringToFront()
+
+        id_first.setOnClickListener {
+            id_first.visibility = INVISIBLE
+            id_second.visibility = VISIBLE
+            id_third.visibility = INVISIBLE
+            id_reg.visibility = GONE
+        }
+
+        id_second.setOnClickListener {
+            id_second.visibility = INVISIBLE
+            id_third.visibility = VISIBLE
+            id_first.visibility = INVISIBLE
+            id_reg.visibility = GONE
+        }
+
+        id_third.setOnClickListener {
+            id_third.visibility = INVISIBLE
+            id_first.visibility = VISIBLE
+            id_second.visibility = INVISIBLE
+            id_reg.visibility = GONE
+        }
+
+        fetchJson()
+        qrgen()
+
         do_nav_view.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+    }
+
+    private fun qrgen() {
+
+        val iv = findViewById<ImageView>(R.id.iv)
+
+        val pref1 = getSharedPreferences("regnum", MODE_PRIVATE)
+        val regdata = pref1.getInt("regnum", 0).toString()
+
+        val content = "http://dir$regdata.busanhs.xyz"
+
+        val writer = QRCodeWriter()
+        val bitMatrix = writer.encode(content, BarcodeFormat.QR_CODE, 512, 512)
+        val width = bitMatrix.width
+        val height = bitMatrix.height
+        val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565)
+        for (x in 0 until width) {
+            for (y in 0 until height) {
+                bitmap.setPixel(x, y, if (bitMatrix.get(x, y)) Color.BLACK else Color.WHITE)
+            }
+        }
+        iv.setImageBitmap(bitmap)
+
+    }
+
+    private fun fetchJson() {
+        println("데어터를 가져 오는 중...")
+
+        val pref1 = getSharedPreferences("regnum", MODE_PRIVATE)
+        val regdata = pref1.getInt("regnum", 0).toString()
+
+        val url1 = "http://dir$regdata.busanhs.xyz"
+
+        val request1 = Request.Builder().url(url1).build()
+        val client1 = OkHttpClient()
+
+        client1.newCall(request1).enqueue(object : Callback {
+            override fun onResponse(call: Call, response: Response) {
+                val body = response.body?.string()
+                println(body)
+
+                try
+                {
+                    val jarray = JSONArray(body)   // JSONArray 생성
+                    for (i in 0 until jarray.length())
+                    {
+                        val jObject = jarray.getJSONObject(i)  // JSONObject 추출
+                        val name = jObject.getString("name")
+                        val g1cls = jObject.getString("g1cls")
+                        val g1num = jObject.getString("g1num")
+                        val g2cls = jObject.getString("g2cls")
+                        val g2num = jObject.getString("g2num")
+                        val g3cls = jObject.getString("g3cls")
+                        val g3num = jObject.getString("g3num")
+                        val email = jObject.getString("email")
+                        val birthdate = jObject.getString("birthdate")
+
+                        id_name.text = name
+                        id_g1b.text = "$g1cls 반"
+                        id_g1c.text = "$g1num 번"
+                        id_g2b.text = "$g2cls 반"
+                        id_g2c.text = "$g2num 번"
+                        id_g3b.text = "$g3cls 반"
+                        id_g3c.text = "$g3num 번"
+                        id_email_value.text = "$email"
+                        id_birth_value.text = "$birthdate"
+                        id_regnum_debug.text = "$regdata"
+
+                    }
+                }
+                catch (e:JSONException) {
+                    e.printStackTrace()
+                }
+
+            }
+
+            override fun onFailure(call: Call, e: IOException) {
+//                Looper.prepare()
+//                val toasttext = "네트워크 상태를 확인하신 후 이용하여 주십시오."
+//                Toast.makeText(applicationContext, toasttext, Toast.LENGTH_SHORT).show()
+//                Looper.loop()
+                println("리퀘스트 실패")
+            }
+        })
     }
 
     private var time:Long = 0

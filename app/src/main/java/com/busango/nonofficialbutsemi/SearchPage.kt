@@ -22,27 +22,20 @@ class SearchPage :Activity() {
         when (item.itemId) {
             R.id.navigation_home -> {
                 val intent = Intent(this, MainActivity::class.java)
+                Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
-                scwebview.visibility = VISIBLE
-                searchpagepar.visibility = INVISIBLE
-                screcyclers.visibility = INVISIBLE
-                my_recycler_view01.visibility = INVISIBLE
-                my_recycler_view02.visibility = INVISIBLE
-                my_recycler_view03.visibility = INVISIBLE
-                scwebview.loadUrl("https://busanhs.win/kotlin/tommeal.php")
+                val intent = Intent(this, DoCenter::class.java)
+                Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
-                scwebview.visibility = VISIBLE
-                searchpagepar.visibility = INVISIBLE
-                screcyclers.visibility = INVISIBLE
-                my_recycler_view01.visibility = INVISIBLE
-                my_recycler_view02.visibility = INVISIBLE
-                my_recycler_view03.visibility = INVISIBLE
-                scwebview.loadUrl("http://busan.hs.kr/page/board/BOARD_1001/main.html?siteid=busanhs&boardid=BUSANHS_007&uid=&category=")
+                val intent = Intent(this, SchoolBoard::class.java)
+                Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
                 return@OnNavigationItemSelectedListener true
             }
         }
