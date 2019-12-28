@@ -12,7 +12,7 @@
         android:focusableInTouchMode="false"
         android:isScrollContainer="false"
         android:overScrollMode="never"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/sc_nav_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

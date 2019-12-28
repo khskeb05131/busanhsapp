@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "486330301530",
+    "firebase_url": "https://busanhsapp.firebaseio.com",
+    "project_id": "busanhsapp",
+    "storage_bucket": "busanhsapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486330301530:android:4ca7663c9e6e9894502c63",
+        "android_client_info": {
+          "package_name": "com.busanhs.nonofficialbutsemi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486330301530-l5tipj2she6i77ds0e41p78nlupevld9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.busanhs.nonofficialbutsemi",
+            "certificate_hash": "43dde561dacd596bd60c4e8ea0c97ba9f0c6b76e"
+          }
+        },
+        {
+          "client_id": "486330301530-fvo8097eeveshr386ocrbg5pnmg3dcuv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZBJoyRNtSWCtIrBXLbU33DK8yyy--4ew"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486330301530-fvo8097eeveshr386ocrbg5pnmg3dcuv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

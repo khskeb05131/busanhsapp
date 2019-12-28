@@ -8,16 +8,12 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
-import android.view.View
 import android.webkit.*
-import kotlinx.android.synthetic.main.schoolwebview.*
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.schoolboard.*
 import kotlinx.android.synthetic.main.schoolwebview.sc_nav_view
-import kotlin.system.exitProcess
+
+
 
 class BoardWebview : Activity() {
 
@@ -56,13 +52,6 @@ class BoardWebview : Activity() {
         setContentView(R.layout.schoolwebview)
         mURL = intent.getStringExtra("url")
 
-            scwebview.webViewClient = object: WebViewClient() {
-            override fun shouldOverrideUrlLoading(view: WebView, Url: String): Boolean {
-                view.loadUrl(Url)
-                return true
-            }
-        }
-
         scwebview = findViewById(R.id.scwebview)
         scwebview.settings.javaScriptEnabled = true
         scwebview.settings.domStorageEnabled = true
@@ -80,7 +69,7 @@ class BoardWebview : Activity() {
         scwebview.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN)
 
         scwebview.loadUrl("file:///android_asset/loading.html")
-        scwebview.webViewClient = MainActivity.MyClient()
+//        scwebview.webViewClient = BoardWebview.MyClient()
         scwebview.setDownloadListener { url, userAgent, contentDisposition, mimeType, _ ->
             val request = DownloadManager.Request(Uri.parse(url))
             request.setMimeType(mimeType)
@@ -96,14 +85,25 @@ class BoardWebview : Activity() {
             Toast.makeText(applicationContext, "파일을 다운로드 하고 있습니다.", Toast.LENGTH_LONG).show()
         }
 
+        scwebview.webViewClient = object: WebViewClient() {
+            override fun shouldOverrideUrlLoading(view: WebView, Url: String): Boolean {
+                view.loadUrl(Url)
+                return true
+            }
+        }
+
+        scwebview.loadUrl(mURL)
+
         sc_nav_view.getMenu().getItem(2).setChecked(true)
         sc_nav_view.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
     }
 
-//    override fun onBackPressed() {
-//        if(scwebview.canGoBack()){
-//            scwebview.goBack()} else {
-//            ActivityCompat.finishAffinity(this)
-//        }
-//    }
+    override fun onBackPressed() {
+        if(scwebview.canGoBack()){
+            scwebview.goBack()} else {
+            val intent = Intent(this, SchoolBoard::class.java)
+            Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+        }
+    }
 }

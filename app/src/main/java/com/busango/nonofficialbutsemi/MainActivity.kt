@@ -1,25 +1,26 @@
 package com.busango.nonofficialbutsemi
 
 import android.app.Activity
-import android.app.DownloadManager
-import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
 import android.os.Looper
 import android.util.Log
 import android.view.View.*
-import android.webkit.CookieManager
-import android.webkit.URLUtil
-import android.webkit.WebView
-import android.webkit.WebViewClient
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.view.accessibility.AccessibilityEventCompat.setAction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.google.android.play.core.install.InstallState
+import com.google.android.play.core.install.InstallStateUpdatedListener
+import com.google.android.play.core.install.model.AppUpdateType
+import com.google.android.play.core.install.model.AppUpdateType.FLEXIBLE
+import com.google.android.play.core.install.model.InstallStatus
+import com.google.android.play.core.install.model.UpdateAvailability
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonParser
 import kotlinx.android.synthetic.main.activity_main.*
@@ -31,8 +32,11 @@ import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var mywebview: WebView
-    private lateinit var searchpage: WebView
+    val MY_REQUEST_CODE = 1001
+    val REQUEST_CODE_UPDATE = 1001
+
+//    private lateinit var mywebview: WebView
+//    private lateinit var searchpage: WebView
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
@@ -43,7 +47,7 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
-                mywebview.visibility = INVISIBLE
+//                mywebview.visibility = INVISIBLE
                 searchpagepar.visibility = INVISIBLE
                 screcyclers.visibility = INVISIBLE
                 my_recycler_view01.visibility = INVISIBLE
@@ -54,7 +58,7 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
-                mywebview.visibility = INVISIBLE
+//                mywebview.visibility = INVISIBLE
                 searchpagepar.visibility = INVISIBLE
                 screcyclers.visibility = INVISIBLE
                 my_recycler_view01.visibility = INVISIBLE
@@ -71,6 +75,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_main)
 
 //        sc_nav_view.getMenu().getItem(0).setChecked(true)
@@ -121,6 +126,7 @@ class MainActivity : AppCompatActivity() {
         tommy_recycler_view03.visibility = GONE
 
         //tomorrow recycler view first run
+
 
         //searchpage - custom
         searchpagepar.visibility = INVISIBLE
@@ -191,38 +197,45 @@ class MainActivity : AppCompatActivity() {
             tommy_recycler_view02.visibility = GONE
             tommy_recycler_view03.visibility = GONE
         }
+//        JSON 송수신
+        fetchJson()
 
-        mywebview = findViewById(R.id.scwebview)
-        mywebview.settings.javaScriptEnabled = true
-        mywebview.settings.domStorageEnabled = true
-        mywebview.loadUrl("file:///android_asset/loading.html")
-        mywebview.webViewClient = MyClient()
-        mywebview.setDownloadListener { url, userAgent, contentDisposition, mimeType, _ ->
-            val request = DownloadManager.Request(Uri.parse(url))
-            request.setMimeType(mimeType)
-            request.addRequestHeader("cookie", CookieManager.getInstance().getCookie(url))
-            request.addRequestHeader("User-Agent", userAgent)
-            request.setDescription("파일을 다운로드 하고 있습니다.")
-            request.setTitle(URLUtil.guessFileName(url, contentDisposition, mimeType))
-            request.allowScanningByMediaScanner()
-            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-            request.setDestinationInExternalFilesDir(this@MainActivity, Environment.DIRECTORY_DOWNLOADS, URLUtil.guessFileName(url, contentDisposition, mimeType))
-            val dm = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-            dm.enqueue(request)
-            Toast.makeText(applicationContext, "파일을 다운로드 하고 있습니다.", Toast.LENGTH_LONG).show()
+        val appUpdateManager = AppUpdateManagerFactory.create(this)
+
+        appUpdateManager?.let {
+            it.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
+
+                if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                    && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)) {
+                    // or AppUpdateType.FLEXIBLE
+                    appUpdateManager?.startUpdateFlowForResult(
+                        appUpdateInfo,
+                        AppUpdateType.FLEXIBLE, // or AppUpdateType.FLEXIBLE
+                        this,
+                        REQUEST_CODE_UPDATE
+                    )
+                }
+            }
         }
 
-        fetchJson()
+        val listener = InstallStateUpdatedListener {
+            // Handle install state
+            if (it.installStatus() == InstallStatus.DOWNLOADED) {
+                popupSnackbarForCompleteUpdate()
+            }
+        }
+
+        appUpdateManager?.registerListener(listener)
 
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
     }
 
-    class MyClient : WebViewClient() {
-        override fun shouldOverrideUrlLoading(view: WebView, Url: String): Boolean {
-            view.loadUrl(Url)
-            return true
-        }
-    }
+//    class MyClient : WebViewClient() {
+//        override fun shouldOverrideUrlLoading(view: WebView, Url: String): Boolean {
+//            view.loadUrl(Url)
+//            return true
+//        }
+//    }
 
     private fun fetchJson(){
         println("데어터를 가져 오는 중...")
@@ -427,6 +440,75 @@ class MainActivity : AppCompatActivity() {
             finish()
             exitProcess(0)
         }
+    }
+
+//    fun checkForUpdate(){
+//
+//        // Creates instance of the manager.
+//        val appUpdateManager = AppUpdateManagerFactory.create(this)
+//
+//        // Checks that the platform will allow the specified type of update.
+//        appUpdateManager.appUpdateInfo.addOnSuccessListener {
+//            if (it.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE &&
+//                it.isUpdateTypeAllowed(FLEXIBLE))
+//            {
+//                appUpdateManager.startUpdateFlowForResult(
+//                    it,
+//                    FLEXIBLE,
+//                    this,
+//                    REQUEST_CODE_UPDATE)
+//
+//            }
+//        }
+//
+//    }
+
+//    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//        if (requestCode == REQUEST_CODE_UPDATE) {
+//            if (requestCode != RESULT_OK) {
+//                Log.e("System out", "Update flow failed! Result code: " + resultCode)
+//                // If the update is cancelled or fails,
+//                // you can request to start the update again.
+//            }
+//        }
+//    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == REQUEST_CODE_UPDATE) {
+            if (resultCode != Activity.RESULT_OK) {
+                Toast.makeText(this, "업데이트가 취소 되었습니다.", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun popupSnackbarForCompleteUpdate() {
+        val appUpdateManager = AppUpdateManagerFactory.create(this)
+        val snackbar = Snackbar.make(findViewById(R.id.container), "업데이트 버전 다운로드 완료", 5000)
+            .setAction("설치/재시작") {
+                appUpdateManager?.completeUpdate()
+            }
+
+        snackbar.show()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val appUpdateManager = AppUpdateManagerFactory.create(this)
+        appUpdateManager
+            .getAppUpdateInfo()
+            .addOnSuccessListener(
+                { appUpdateInfo-> if ((appUpdateInfo.updateAvailability() === UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS))
+                {
+                    // If an in-app update is already running, resume the update.
+                    appUpdateManager.startUpdateFlowForResult(
+                        appUpdateInfo,
+                        FLEXIBLE,
+                        this,
+                        MY_REQUEST_CODE)
+                } })
     }
 
     data class RentInfo(val requesttype: String, val row: List<Book> )

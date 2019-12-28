@@ -54,4 +54,6 @@
     <string name="reg_btn">등록 / Registration</string>
     <string name="barcode">barcode</string>
     <string name="bshs_logo">bshs_logo</string>
+    <string name="id_tel_egdata">전화번호</string>
+    <string name="id_tel_egdata01">010-1234-5678</string>
 </resources>

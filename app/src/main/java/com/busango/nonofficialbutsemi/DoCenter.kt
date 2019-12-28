@@ -2,6 +2,8 @@ package com.busango.nonofficialbutsemi
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -13,11 +15,8 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.gson.GsonBuilder
-import com.google.gson.JsonParser
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.qrcode.QRCodeWriter
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.docenter.*
 import okhttp3.*
 import org.json.JSONArray
@@ -27,6 +26,8 @@ import kotlin.system.exitProcess
 
 
 class DoCenter :Activity() {
+
+    private lateinit var imgview: ImageView
 
     //TODO: 꼭 앱 죽이기 전에 먼저 반응받아서 죽는 놈들 정리할 것.
 
@@ -64,8 +65,9 @@ class DoCenter :Activity() {
         do_nav_view.menu.getItem(1).isChecked = true
 
         val pref0 = getSharedPreferences("docenter_first", MODE_PRIVATE)
-        val first0 = pref0.getBoolean("docenter_first", false)
         val editor0 = pref0.edit()
+        val first0 = pref0.getBoolean("docenter_first", false)
+
         val regnum = getSharedPreferences("regnum", MODE_PRIVATE)
         val regnumEd = regnum.edit()
 
@@ -79,17 +81,20 @@ class DoCenter :Activity() {
             id_reg.bringToFront()
 
             btn_reg.setOnClickListener {
-                val regnumEt = edit_regnum.text.toString().toInt()
-                regnumEd.putInt("regnum", regnumEt)
-                regnumEd.apply()
-                editor0.putBoolean("docenter_first", true)
-                editor0.apply()
+                if (edit_regnum.length() == 4){
+                    val regnumEt = edit_regnum.text.toString().toInt()
+                    regnumEd.putInt("regnum", regnumEt)
+                    regnumEd.apply()
+                    editor0.putBoolean("docenter_first", true)
+                    editor0.apply()
+                    Toast.makeText(applicationContext, "로그인하였습니다.", Toast.LENGTH_LONG).show()
 
-                id_reg.visibility = GONE
-                id_first.visibility = VISIBLE
-                id_second.visibility = INVISIBLE
-                id_third.visibility = INVISIBLE
-                id_first.bringToFront()
+                    val intent = Intent(this, DoCenter::class.java)
+                    Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                } else {
+                    Toast.makeText(applicationContext, "개인부호번호는 4자리입니다.", Toast.LENGTH_SHORT).show()
+                }
             }
         }
         else
@@ -123,6 +128,7 @@ class DoCenter :Activity() {
 
         fetchJson()
         qrgen()
+        remregdata()
 
         do_nav_view.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
     }
@@ -133,6 +139,7 @@ class DoCenter :Activity() {
 
         val pref1 = getSharedPreferences("regnum", MODE_PRIVATE)
         val regdata = pref1.getInt("regnum", 0).toString()
+        id_regnum_debug.text = "$regdata"
 
         val content = "http://dir$regdata.busanhs.xyz"
 
@@ -148,6 +155,28 @@ class DoCenter :Activity() {
         }
         iv.setImageBitmap(bitmap)
 
+    }
+
+    private fun remregdata() {
+        remregdata.setOnClickListener {
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("개인부호번호 초기화")
+            builder.setMessage("초기화하시겠습니까?")
+            builder.setIcon(R.drawable.ic_delete_black_24dp)
+            builder.setPositiveButton("초기화"
+            ) { dialog, which -> Toast.makeText(applicationContext, "초기화하였습니다. 재시작하여 주십시오.", Toast.LENGTH_LONG).show()
+
+                val pref0 = getSharedPreferences("docenter_first", MODE_PRIVATE)
+                val editor0 = pref0.edit()
+                editor0.putBoolean("docenter_first", false)
+                editor0.apply()
+            }
+
+            builder.setNegativeButton("취소"
+            ) { dialog, which -> Toast.makeText(applicationContext, "취소하셨습니다.", Toast.LENGTH_LONG).show() }
+            val alertDialog = builder.create()
+            alertDialog.show()
+        }
     }
 
     private fun fetchJson() {
@@ -173,6 +202,7 @@ class DoCenter :Activity() {
                     {
                         val jObject = jarray.getJSONObject(i)  // JSONObject 추출
                         val name = jObject.getString("name")
+                        val nowgrade = jObject.getString("nowgrade")
                         val g1cls = jObject.getString("g1cls")
                         val g1num = jObject.getString("g1num")
                         val g2cls = jObject.getString("g2cls")
@@ -180,7 +210,10 @@ class DoCenter :Activity() {
                         val g3cls = jObject.getString("g3cls")
                         val g3num = jObject.getString("g3num")
                         val email = jObject.getString("email")
+                        val tel = jObject.getString("tel")
                         val birthdate = jObject.getString("birthdate")
+
+                        val imagedir = resources.getIdentifier(nowgrade,"drawable", packageName)
 
                         id_name.text = name
                         id_g1b.text = "$g1cls 반"
@@ -190,8 +223,9 @@ class DoCenter :Activity() {
                         id_g3b.text = "$g3cls 반"
                         id_g3c.text = "$g3num 번"
                         id_email_value.text = "$email"
+                        id_tel_value.text = "$tel"
                         id_birth_value.text = "$birthdate"
-                        id_regnum_debug.text = "$regdata"
+                        id_school_pic.setImageResource(imagedir)
 
                     }
                 }

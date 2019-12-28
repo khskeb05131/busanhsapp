@@ -2,10 +2,10 @@ package com.busango.nonofficialbutsemi
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Bundle
-import android.view.View.INVISIBLE
-import android.view.View.VISIBLE
+import android.view.View.*
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -55,6 +55,17 @@ class SearchPage :Activity() {
             override fun shouldOverrideUrlLoading(view: WebView, Url: String): Boolean {
                 view.loadUrl(Url)
                 return true
+            }
+
+            override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
+                super.onPageStarted(view, url, favicon)
+                pb_par01.visibility = VISIBLE
+                pb_par01.bringToFront()
+            }
+
+            override fun onPageFinished(view: WebView?, url: String?) {
+                super.onPageFinished(view, url)
+                pb_par01.visibility = GONE
             }
         }
 

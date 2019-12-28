@@ -1,32 +1,17 @@
 package com.busango.nonofficialbutsemi
 
 import android.app.Activity
-import android.app.DownloadManager
-import android.content.Context
 import android.content.Intent
-import android.graphics.Color
-import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
-import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
-import android.webkit.CookieManager
-import android.webkit.URLUtil
-import android.webkit.WebSettings.LayoutAlgorithm
-import android.webkit.WebView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.recyclerview_item.view.*
 import kotlinx.android.synthetic.main.schoolboard.*
 import kotlinx.android.synthetic.main.schoolboard.sccard01
-import kotlinx.android.synthetic.main.schoolboard.bg_disable_site
 import kotlinx.android.synthetic.main.schoolboard.scdatecard
 import kotlin.system.exitProcess
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 
 
 
@@ -65,66 +50,69 @@ class SchoolBoard :Activity() {
 //        window.addFlags(WindowManager.LayoutParams.FLAG_SECURE)
         setContentView(R.layout.schoolboard)
 
-        bg_disable_site.bringToFront()
-        bg_disable_site.setOnClickListener {
-            bg_disable_site.visibility = View.GONE
-        }
-
         removecards()
-
-        bg_disable_site.bringToFront()
 
         viewcards()
 
         sbtv_date.setOnClickListener{
             val intent = Intent(applicationContext, BoardWebview::class.java)
-            intent.putExtra("url","http://busan.hs.kr")
+            intent.putExtra("url","http://school.busanedu.net/busan-h/main.do")
             startActivity(intent)
         }
 
         boarding01.setOnClickListener{
             val intent = Intent(applicationContext, BoardWebview::class.java)
-            intent.putExtra("url","http://busan.hs.kr/page/board/BOARD_1001/main.html?siteid=busanhs&boardid=BUSANHS_007&uid=&category=")
+            intent.putExtra("url","http://school.busanedu.net/busan-h/na/ntt/selectNttList.do?mi=611183&bbsId=1006717")
             startActivity(intent)
         }
         boarding02.setOnClickListener{
             val intent = Intent(applicationContext, BoardWebview::class.java)
-            intent.putExtra("url","http://busan.hs.kr/page/board/BOARD_1001/main.html?siteid=busanhs&boardid=BUSANHS_040&uid=&category=")
+            intent.putExtra("url","http://school.busanedu.net/busan-h/na/ntt/selectNttList.do?mi=611184&bbsId=1006718")
             startActivity(intent)
         }
         boarding03 .setOnClickListener{
             val intent = Intent(applicationContext, BoardWebview::class.java)
-            intent.putExtra("url","http://busan.hs.kr/asp/PLAN/PLAN_1001/main.html?siteid=busanhs&boardid=PLAN&uid=&category=&board_color=blue")
+            intent.putExtra("url","http://school.busanedu.net/busan-h/sv/schdulView/schdulCalendarView.do?mi=611191")
             startActivity(intent)
         }
         boarding04.setOnClickListener{
             val intent = Intent(applicationContext, BoardWebview::class.java)
-            intent.putExtra("url","http://busan.hs.kr/page/board/BOARD_1001/main.html?siteid=busanhs&boardid=BUSANHS_146&uid=&category=")
+            intent.putExtra("url","http://school.busanedu.net/busan-h/na/ntt/selectNttList.do?mi=611192&bbsId=1006724")
             startActivity(intent)
         }
         special01.setOnClickListener{
             val intent = Intent(applicationContext, BoardWebview::class.java)
-            intent.putExtra("url","http://busan.hs.kr/page/board/BOARD_1001/main.html?siteid=busanhs&boardid=BUSANHS_149&uid=&category=")
+            intent.putExtra("url","http://school.busanedu.net/busan-h/na/ntt/selectNttList.do?mi=611216&bbsId=1006737")
             startActivity(intent)
         }
         special02.setOnClickListener{
             val intent = Intent(applicationContext, BoardWebview::class.java)
-            intent.putExtra("url","http://busan.hs.kr/page/board/BOARD_1001/main.html?siteid=busanhs&boardid=BUSANHS_158&uid=&category=")
+            intent.putExtra("url","http://school.busanedu.net/busan-h/na/ntt/selectNttList.do?mi=611217&bbsId=1006738")
+            startActivity(intent)
+        }
+        special03.setOnClickListener{
+            val intent = Intent(applicationContext, BoardWebview::class.java)
+            intent.putExtra("url","http://school.busanedu.net/busan-h/na/ntt/selectNttList.do?mi=611218&bbsId=1006739")
+            startActivity(intent)
+        }
+        special04.setOnClickListener{
+            val intent = Intent(applicationContext, BoardWebview::class.java)
+            intent.putExtra("url","http://school.busanedu.net/busan-h/na/ntt/selectNttList.do?mi=611224&bbsId=1006744")
             startActivity(intent)
         }
         scboard01.setOnClickListener{
             val intent = Intent(applicationContext, BoardWebview::class.java)
-            intent.putExtra("url","http://busan.hs.kr/page/board/BOARD_1001/main.html?siteid=busanhs&boardid=BUSANHS_039&uid=&category=")
+            intent.putExtra("url","http://school.busanedu.net/busan-h/na/ntt/selectNttList.do?mi=611237&bbsId=1006755")
             startActivity(intent)
         }
         scboard02.setOnClickListener{
             val intent = Intent(applicationContext, BoardWebview::class.java)
-            intent.putExtra("url","http://busan.hs.kr/page/board/BOARD_1001/main.html?siteid=busanhs&boardid=BUSANHS_144&uid=&category=")
+            intent.putExtra("url","http://school.busanedu.net/busan-h/na/ntt/selectNttList.do?mi=611244&bbsId=1006761")
             startActivity(intent)
         }
         scboard03.setOnClickListener{
             val intent = Intent(applicationContext, BoardWebview::class.java)
-            intent.putExtra("url","http://busan.hs.kr/page/board/BOARD_1001/main.html?siteid=busanhs&boardid=BUSANHS_085&uid=&category=")
+            intent.putExtra("url","http://school.busanedu.net/busan-h/na/ntt/selectNttList.do?mi=611268&bbsId=1006772")
             startActivity(intent)
         }
 
@@ -138,7 +126,7 @@ class SchoolBoard :Activity() {
         sccard03.visibility = INVISIBLE
         scdatecard.visibility = INVISIBLE
         sbrecyclers.visibility = INVISIBLE
-        Toast.makeText(applicationContext, "다른 항목으로 이동하려면 학교 공지사항 탭을 누르어 이동하십시오.", Toast.LENGTH_LONG).show()
+//        Toast.makeText(applicationContext, "다른 항목으로 이동하려면 학교 공지사항 탭을 누르어 이동하십시오.", Toast.LENGTH_LONG).show()
     }
 
     private fun viewcards() {
