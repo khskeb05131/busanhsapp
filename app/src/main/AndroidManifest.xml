@@ -24,26 +24,37 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <intent-filter android:autoVerify="true">
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="http" android:host="busan.hs.kr" />
-                <data android:scheme="http" android:host="http://school.busanedu.net/" />
-                <data android:scheme="http" android:host="http://school.busanedu.net/busan-h/" />
-                <data android:scheme="http" android:host="http://school.busanedu.net/busan-h/main.do" />
-                <data android:scheme="http" android:host="http://school.busanedu.net/busan-h/main.do" />
-            </intent-filter>
         </activity>
-        <activity android:name=".SearchPage" />
+        <activity
+            android:name=".SearchPage"
+            />
+        <activity
+            android:name=".SchoolBoard"
+            />
+        <activity
+            android:name=".BoardWebview"
+            />
         <activity
             android:name=".DoCenter"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".SchoolBoard" />
-        <activity android:name=".BoardWebview" />
+            />
+        <activity
+            android:name=".Func0"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".Func1"
+            android:screenOrientation="portrait"
+            />
+<!--        <activity-->
+<!--            android:name=".Func2"-->
+<!--            android:screenOrientation="portrait"-->
+<!--            />-->
+<!--        <activity-->
+<!--            android:name=".Func3"-->
+<!--            android:screenOrientation="portrait"-->
+<!--            />-->
     </application>
 
 </manifest>

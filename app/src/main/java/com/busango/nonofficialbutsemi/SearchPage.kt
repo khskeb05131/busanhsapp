@@ -23,19 +23,19 @@ class SearchPage :Activity() {
             R.id.navigation_home -> {
                 val intent = Intent(this, MainActivity::class.java)
                 Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(intent)
+                startActivity(intent,null)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
                 val intent = Intent(this, DoCenter::class.java)
                 Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(intent)
+                startActivity(intent,null)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
                 val intent = Intent(this, SchoolBoard::class.java)
                 Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(intent)
+                startActivity(intent,null)
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -72,7 +72,7 @@ class SearchPage :Activity() {
         searchpagepar.visibility = VISIBLE
         searchpage.visibility = VISIBLE
         searchpage.settings.javaScriptEnabled = true
-//        searchpage.loadUrl("http://khskeb0513.pw/time1")
+//      searchpage.loadUrl("http://khskeb0513.pw/time1")
         nav_view.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
         init()
     }

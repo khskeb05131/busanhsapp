@@ -40,7 +40,7 @@ class RecyclerViewAdapter(private val bookList: MainActivity.RentInfo) : Recycle
                 intent.putExtra("title", "title")
                 println(itemView.book_title01.text)
                 intent.putExtra("url", googlecom+itemView.book_title01.text)
-                view.context.startActivity(intent)
+                view.context.startActivity(intent,null)
             }
         }
 

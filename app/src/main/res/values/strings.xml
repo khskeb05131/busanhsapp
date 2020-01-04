@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">부산고등학교</string>
     <string name="title_home">급식메뉴</string>
-    <string name="title_dashboard">디지털 학생증</string>
-    <string name="title_notifications">학교 공지사항</string>
+    <string name="title_dashboard">기능 서랍</string>
+    <string name="title_notifications">학교 홈페이지</string>
     <string name="errortype">어플리케이션에 오류가 발생하였습니다. 다시시작하여 주십시오.</string>
     <string name="tv_docenter">중간 탭 입니다. 조만간 아이디어가 실현 될 예정입니다.</string>
 
@@ -55,5 +55,13 @@
     <string name="barcode">barcode</string>
     <string name="bshs_logo">bshs_logo</string>
     <string name="id_tel_egdata">전화번호</string>
-    <string name="id_tel_egdata01">010-1234-5678</string>
+    <string name="id_tel_egdata01">010–1234–5678</string>
+    <string name="function_drawer">Function Drawer</string>
+    <string name="func0">디지털 학생증</string>
+    <string name="func0_msg">행사종료하여 서버 종료하였음.\n이용재개일: 미정</string>
+    <string name="func1">부고 학사일정</string>
+    <string name="func2">Func2 (null)</string>
+    <string name="func3">Func3 (null)</string>
+    <string name="tv_sch_title">개발중인 기능! 학사일정 알림</string>
+    <string name="spn02_hint">Click, then will be appear DatePicker.</string>
 </resources>

@@ -25,19 +25,19 @@ class SchoolBoard :Activity() {
             R.id.navigation_home -> {
                 val intent = Intent(this, MainActivity::class.java)
                 Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(intent)
+                startActivity(intent,null)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
                 val intent = Intent(this, DoCenter::class.java)
                 Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(intent)
+                startActivity(intent,null)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
                 val intent = Intent(this, SchoolBoard::class.java)
                 Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(intent)
+                startActivity(intent,null)
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -57,63 +57,63 @@ class SchoolBoard :Activity() {
         sbtv_date.setOnClickListener{
             val intent = Intent(applicationContext, BoardWebview::class.java)
             intent.putExtra("url","http://school.busanedu.net/busan-h/main.do")
-            startActivity(intent)
+            startActivity(intent,null)
         }
 
         boarding01.setOnClickListener{
             val intent = Intent(applicationContext, BoardWebview::class.java)
             intent.putExtra("url","http://school.busanedu.net/busan-h/na/ntt/selectNttList.do?mi=611183&bbsId=1006717")
-            startActivity(intent)
+            startActivity(intent,null)
         }
         boarding02.setOnClickListener{
             val intent = Intent(applicationContext, BoardWebview::class.java)
             intent.putExtra("url","http://school.busanedu.net/busan-h/na/ntt/selectNttList.do?mi=611184&bbsId=1006718")
-            startActivity(intent)
+            startActivity(intent,null)
         }
         boarding03 .setOnClickListener{
             val intent = Intent(applicationContext, BoardWebview::class.java)
             intent.putExtra("url","http://school.busanedu.net/busan-h/sv/schdulView/schdulCalendarView.do?mi=611191")
-            startActivity(intent)
+            startActivity(intent,null)
         }
         boarding04.setOnClickListener{
             val intent = Intent(applicationContext, BoardWebview::class.java)
             intent.putExtra("url","http://school.busanedu.net/busan-h/na/ntt/selectNttList.do?mi=611192&bbsId=1006724")
-            startActivity(intent)
+            startActivity(intent,null)
         }
         special01.setOnClickListener{
             val intent = Intent(applicationContext, BoardWebview::class.java)
             intent.putExtra("url","http://school.busanedu.net/busan-h/na/ntt/selectNttList.do?mi=611216&bbsId=1006737")
-            startActivity(intent)
+            startActivity(intent,null)
         }
         special02.setOnClickListener{
             val intent = Intent(applicationContext, BoardWebview::class.java)
             intent.putExtra("url","http://school.busanedu.net/busan-h/na/ntt/selectNttList.do?mi=611217&bbsId=1006738")
-            startActivity(intent)
+            startActivity(intent,null)
         }
         special03.setOnClickListener{
             val intent = Intent(applicationContext, BoardWebview::class.java)
             intent.putExtra("url","http://school.busanedu.net/busan-h/na/ntt/selectNttList.do?mi=611218&bbsId=1006739")
-            startActivity(intent)
+            startActivity(intent,null)
         }
         special04.setOnClickListener{
             val intent = Intent(applicationContext, BoardWebview::class.java)
             intent.putExtra("url","http://school.busanedu.net/busan-h/na/ntt/selectNttList.do?mi=611224&bbsId=1006744")
-            startActivity(intent)
+            startActivity(intent,null)
         }
         scboard01.setOnClickListener{
             val intent = Intent(applicationContext, BoardWebview::class.java)
             intent.putExtra("url","http://school.busanedu.net/busan-h/na/ntt/selectNttList.do?mi=611237&bbsId=1006755")
-            startActivity(intent)
+            startActivity(intent,null)
         }
         scboard02.setOnClickListener{
             val intent = Intent(applicationContext, BoardWebview::class.java)
             intent.putExtra("url","http://school.busanedu.net/busan-h/na/ntt/selectNttList.do?mi=611244&bbsId=1006761")
-            startActivity(intent)
+            startActivity(intent,null)
         }
         scboard03.setOnClickListener{
             val intent = Intent(applicationContext, BoardWebview::class.java)
             intent.putExtra("url","http://school.busanedu.net/busan-h/na/ntt/selectNttList.do?mi=611268&bbsId=1006772")
-            startActivity(intent)
+            startActivity(intent,null)
         }
 
         sc_nav_view.getMenu().getItem(2).setChecked(true)

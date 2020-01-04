@@ -9,13 +9,11 @@ import android.view.View.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.view.accessibility.AccessibilityEventCompat.setAction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
-import com.google.android.play.core.install.InstallState
 import com.google.android.play.core.install.InstallStateUpdatedListener
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.AppUpdateType.FLEXIBLE
@@ -42,31 +40,17 @@ class MainActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.navigation_home -> {
                 val intent = Intent(this, MainActivity::class.java)
-//                Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(intent)
+                startActivity(intent,null)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
-//                mywebview.visibility = INVISIBLE
-                searchpagepar.visibility = INVISIBLE
-                screcyclers.visibility = INVISIBLE
-                my_recycler_view01.visibility = INVISIBLE
-                my_recycler_view02.visibility = INVISIBLE
-                my_recycler_view03.visibility = INVISIBLE
                 val intent = Intent(this, DoCenter::class.java)
-                startActivity(intent)
+                startActivity(intent,null)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
-//                mywebview.visibility = INVISIBLE
-                searchpagepar.visibility = INVISIBLE
-                screcyclers.visibility = INVISIBLE
-                my_recycler_view01.visibility = INVISIBLE
-                my_recycler_view02.visibility = INVISIBLE
-                my_recycler_view03.visibility = INVISIBLE
-//                mywebview.loadUrl("http://busan.hs.kr/page/board/BOARD_1001/main.html?siteid=busanhs&boardid=BUSANHS_007&uid=&category=")
                 val intent = Intent(this, SchoolBoard::class.java)
-                startActivity(intent)
+                startActivity(intent,null)
                 return@OnNavigationItemSelectedListener true
             }
         }

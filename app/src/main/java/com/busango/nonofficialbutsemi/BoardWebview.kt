@@ -26,19 +26,19 @@ class BoardWebview : Activity() {
             R.id.navigation_home -> {
                 val intent = Intent(this, MainActivity::class.java)
                 Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(intent)
+                startActivity(intent,null)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
                 val intent = Intent(this, DoCenter::class.java)
                 Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(intent)
+                startActivity(intent,null)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
                 val intent = Intent(this, SchoolBoard::class.java)
                 Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(intent)
+                startActivity(intent,null)
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -103,7 +103,7 @@ class BoardWebview : Activity() {
             scwebview.goBack()} else {
             val intent = Intent(this, SchoolBoard::class.java)
             Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
+            startActivity(intent,null)
         }
     }
 }
