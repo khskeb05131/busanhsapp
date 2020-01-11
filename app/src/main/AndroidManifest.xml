@@ -47,10 +47,10 @@
             android:name=".Func1"
             android:screenOrientation="portrait"
             />
-<!--        <activity-->
-<!--            android:name=".Func2"-->
-<!--            android:screenOrientation="portrait"-->
-<!--            />-->
+        <activity
+            android:name=".BaseUpdateCheckActivity"
+            android:screenOrientation="portrait"
+            />
 <!--        <activity-->
 <!--            android:name=".Func3"-->
 <!--            android:screenOrientation="portrait"-->

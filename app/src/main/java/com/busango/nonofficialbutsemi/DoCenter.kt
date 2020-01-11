@@ -72,6 +72,8 @@ class DoCenter :Activity() {
                     Toast.makeText(this@DoCenter, "Func$i empty", Toast.LENGTH_SHORT).show()
                 } else if (i == 3) {
                     Toast.makeText(this@DoCenter, "Func$i empty", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, BaseUpdateCheckActivity::class.java)
+                    startActivity(intent,null)
                 }
             }
         }

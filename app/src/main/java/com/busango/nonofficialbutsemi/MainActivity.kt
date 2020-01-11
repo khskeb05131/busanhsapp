@@ -2,6 +2,8 @@ package com.busango.nonofficialbutsemi
 
 import android.app.Activity
 import android.content.Intent
+import android.content.IntentSender
+import android.os.Build
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
@@ -13,28 +15,30 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.play.core.appupdate.AppUpdateInfo
+import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.google.android.play.core.install.InstallState
 import com.google.android.play.core.install.InstallStateUpdatedListener
+import com.google.android.play.core.install.model.ActivityResult
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.AppUpdateType.FLEXIBLE
 import com.google.android.play.core.install.model.InstallStatus
 import com.google.android.play.core.install.model.UpdateAvailability
+import com.google.android.play.core.tasks.Task
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonParser
 import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.*
 import java.io.IOException
 import java.util.*
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
 import kotlin.system.exitProcess
 
 
 class MainActivity : AppCompatActivity() {
-
-    val MY_REQUEST_CODE = 1001
-    val REQUEST_CODE_UPDATE = 1001
-
-//    private lateinit var mywebview: WebView
-//    private lateinit var searchpage: WebView
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
@@ -59,10 +63,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_main)
-
-//        sc_nav_view.getMenu().getItem(0).setChecked(true)
 
         val pref = getSharedPreferences("isFirst", Activity.MODE_PRIVATE)
         val first = pref.getBoolean("isFirst", false)
@@ -184,42 +185,8 @@ class MainActivity : AppCompatActivity() {
 //        JSON 송수신
         fetchJson()
 
-        val appUpdateManager = AppUpdateManagerFactory.create(this)
-
-        appUpdateManager?.let {
-            it.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
-
-                if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
-                    && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)) {
-                    // or AppUpdateType.FLEXIBLE
-                    appUpdateManager?.startUpdateFlowForResult(
-                        appUpdateInfo,
-                        AppUpdateType.FLEXIBLE, // or AppUpdateType.FLEXIBLE
-                        this,
-                        REQUEST_CODE_UPDATE
-                    )
-                }
-            }
-        }
-
-        val listener = InstallStateUpdatedListener {
-            // Handle install state
-            if (it.installStatus() == InstallStatus.DOWNLOADED) {
-                popupSnackbarForCompleteUpdate()
-            }
-        }
-
-        appUpdateManager?.registerListener(listener)
-
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
     }
-
-//    class MyClient : WebViewClient() {
-//        override fun shouldOverrideUrlLoading(view: WebView, Url: String): Boolean {
-//            view.loadUrl(Url)
-//            return true
-//        }
-//    }
 
     private fun fetchJson(){
         println("데어터를 가져 오는 중...")
@@ -424,75 +391,6 @@ class MainActivity : AppCompatActivity() {
             finish()
             exitProcess(0)
         }
-    }
-
-//    fun checkForUpdate(){
-//
-//        // Creates instance of the manager.
-//        val appUpdateManager = AppUpdateManagerFactory.create(this)
-//
-//        // Checks that the platform will allow the specified type of update.
-//        appUpdateManager.appUpdateInfo.addOnSuccessListener {
-//            if (it.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE &&
-//                it.isUpdateTypeAllowed(FLEXIBLE))
-//            {
-//                appUpdateManager.startUpdateFlowForResult(
-//                    it,
-//                    FLEXIBLE,
-//                    this,
-//                    REQUEST_CODE_UPDATE)
-//
-//            }
-//        }
-//
-//    }
-
-//    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//        if (requestCode == REQUEST_CODE_UPDATE) {
-//            if (requestCode != RESULT_OK) {
-//                Log.e("System out", "Update flow failed! Result code: " + resultCode)
-//                // If the update is cancelled or fails,
-//                // you can request to start the update again.
-//            }
-//        }
-//    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == REQUEST_CODE_UPDATE) {
-            if (resultCode != Activity.RESULT_OK) {
-                Toast.makeText(this, "업데이트가 취소 되었습니다.", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    private fun popupSnackbarForCompleteUpdate() {
-        val appUpdateManager = AppUpdateManagerFactory.create(this)
-        val snackbar = Snackbar.make(findViewById(R.id.container), "업데이트 버전 다운로드 완료", 5000)
-            .setAction("설치/재시작") {
-                appUpdateManager?.completeUpdate()
-            }
-
-        snackbar.show()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        val appUpdateManager = AppUpdateManagerFactory.create(this)
-        appUpdateManager
-            .getAppUpdateInfo()
-            .addOnSuccessListener(
-                { appUpdateInfo-> if ((appUpdateInfo.updateAvailability() === UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS))
-                {
-                    // If an in-app update is already running, resume the update.
-                    appUpdateManager.startUpdateFlowForResult(
-                        appUpdateInfo,
-                        FLEXIBLE,
-                        this,
-                        MY_REQUEST_CODE)
-                } })
     }
 
     data class RentInfo(val requesttype: String, val row: List<Book> )

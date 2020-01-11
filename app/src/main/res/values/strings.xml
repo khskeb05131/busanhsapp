@@ -61,7 +61,6 @@
     <string name="func0_msg">행사종료하여 서버 종료하였음.\n이용재개일: 미정</string>
     <string name="func1">부고 학사일정</string>
     <string name="func2">Func2 (null)</string>
-    <string name="func3">Func3 (null)</string>
-    <string name="tv_sch_title">개발중인 기능! 학사일정 알림</string>
-    <string name="spn02_hint">Click, then will be appear DatePicker.</string>
+    <string name="func3">업데이트 확인</string>
+    <string name="tv_sch_title">학사일정 조회 유형을 선택하여 주십시오.</string>
 </resources>
